@@ -51,10 +51,6 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 		SET (CH_SOCKET_LIB "Ws2_32.lib")
 	ELSEIF ("${CH_COMPILER}" STREQUAL "COMPILER_MSVC_X64")
 		SET (CH_SOCKET_LIB "Ws2_32.lib") # btw not Ws2_64.lib that does not exist
-	ELSEIF ("${CH_COMPILER}" STREQUAL "COMPILER_GCC")
-		SET (CH_SOCKET_LIB "")  # not needed?
-	ELSEIF ("${CH_COMPILER}" STREQUAL "COMPILER_GCC_X64")
-		SET (CH_SOCKET_LIB "")  # not needed?
 	ENDIF()
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	SET (CH_SOCKET_LIB "")		  # not needed?
