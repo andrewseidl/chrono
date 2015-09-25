@@ -26,7 +26,7 @@ namespace chrono {
 struct M33 {
   real3 U, V, W;
   inline M33() : U(0), V(0), W(0) {}
-  inline M33(real3 u, real3 v, real3 w) : U(u), V(v), W(w) {}
+  inline M33(const real3& u, const real3& v, const real3& w) : U(u), V(v), W(w) {}
 
   inline M33 operator*(const M33& B) const {
     M33 result;
@@ -215,7 +215,7 @@ static inline std::ostream& operator<<(std::ostream& out, const M33& a) {
   return out;
 }
 
-static inline real4 GetQuat(M33 A) {
+static inline real4 GetQuat(const M33& A) {
   real4 q;
   real s, tr;
   real half = (real)0.5;

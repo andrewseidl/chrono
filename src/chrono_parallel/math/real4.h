@@ -99,7 +99,7 @@ class CHRONO_ALIGN_16 real4 {
   inline real4() : w(0), x(0), y(0), z(0) {}
   inline real4(real a) : w(a), x(a), y(a), z(a) {}
   inline real4(real a, real b, real c) : w(0), x(a), y(b), z(c) {}
-  inline real4(real3 a) : w(0), x(a.x), y(a.y), z(a.z) {}
+  inline real4(const real3& a) : w(0), x(a.x), y(a.y), z(a.z) {}
   inline real4(real d, real a, real b, real c) : w(d), x(a), y(b), z(c) {}
 
   inline real4 operator+(const real4& b) const { return real4(w + b.w, x + b.x, y + b.y, z + b.z); }
@@ -346,7 +346,7 @@ static inline real3 quatRotateMatT(const real3& v, const quaternion& q) {
   //			+ (q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z) * v.z;
   return quatRotate(v, ~q);
 }
-static inline quaternion operator%(const quaternion rhs, const quaternion lhs) {
+static inline quaternion operator%(const quaternion& rhs, const quaternion& lhs) {
   return mult(rhs, lhs);
 }
 
