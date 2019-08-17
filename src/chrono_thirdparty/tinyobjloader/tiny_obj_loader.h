@@ -69,10 +69,10 @@ class MaterialFileReader:
 {
     public:
         MaterialFileReader(const std::string& mtl_basepath): m_mtlBasePath(mtl_basepath) {}
-        virtual ~MaterialFileReader() {}
-        virtual std::string operator() (
+        ~MaterialFileReader() override {}
+        std::string operator() (
           const std::string& matId,
-          std::map<std::string, material_t>& matMap);
+          std::map<std::string, material_t>& matMap) override;
 
     private:
         std::string m_mtlBasePath;

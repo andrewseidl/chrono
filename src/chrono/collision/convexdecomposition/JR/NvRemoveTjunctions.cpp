@@ -281,7 +281,7 @@ public:
     release();
   }
 
-  virtual NxU32 removeTjunctions(RemoveTjunctionsDesc &desc)
+  NxU32 removeTjunctions(RemoveTjunctionsDesc &desc) override
   {
     NxU32 ret = 0;
 

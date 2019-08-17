@@ -94,7 +94,7 @@ struct	btDbvtTreeCollider : btDbvt::ICollide
 	btDbvtBroadphase*	pbp;
 	btDbvtProxy*		proxy;
 	btDbvtTreeCollider(btDbvtBroadphase* p) : pbp(p) {}
-	void	Process(const btDbvtNode* na,const btDbvtNode* nb)
+	void	Process(const btDbvtNode* na,const btDbvtNode* nb) override
 	{
 		if(na!=nb)
 		{
@@ -108,7 +108,7 @@ struct	btDbvtTreeCollider : btDbvt::ICollide
 			++pbp->m_newpairs;
 		}
 	}
-	void	Process(const btDbvtNode* n)
+	void	Process(const btDbvtNode* n) override
 	{
 		Process(n,proxy->leaf);
 	}
@@ -217,7 +217,7 @@ struct	BroadphaseRayTester : btDbvt::ICollide
 		:m_rayCallback(orgCallback)
 	{
 	}
-	void					Process(const btDbvtNode* leaf)
+	void					Process(const btDbvtNode* leaf) override
 	{
 		btDbvtProxy*	proxy=(btDbvtProxy*)leaf->data;
 		m_rayCallback.process(proxy);
@@ -258,7 +258,7 @@ struct	BroadphaseAabbTester : btDbvt::ICollide
 		:m_aabbCallback(orgCallback)
 	{
 	}
-	void					Process(const btDbvtNode* leaf)
+	void					Process(const btDbvtNode* leaf) override
 	{
 		btDbvtProxy*	proxy=(btDbvtProxy*)leaf->data;
 		m_aabbCallback.process(proxy);

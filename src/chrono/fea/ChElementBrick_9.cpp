@@ -183,12 +183,12 @@ void ChElementBrick_9::ShapeFunctionsDerivativeZ(ShapeVector& Nz, double x, doub
 class Brick9_Mass : public ChIntegrable3D<ChMatrixNM<double, 33, 33>> {
   public:
     Brick9_Mass(ChElementBrick_9* element) : m_element(element) {}
-    ~Brick9_Mass() {}
+    ~Brick9_Mass() override {}
 
   private:
     ChElementBrick_9* m_element;
 
-    virtual void Evaluate(ChMatrixNM<double, 33, 33>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 33, 33>& result, const double x, const double y, const double z) override;
 };
 
 void Brick9_Mass::Evaluate(ChMatrixNM<double, 33, 33>& result, const double x, const double y, const double z) {
@@ -233,13 +233,13 @@ void ChElementBrick_9::ComputeMassMatrix() {
 class Brick9_Gravity : public ChIntegrable3D<ChVectorN<double, 33>> {
   public:
     Brick9_Gravity(ChElementBrick_9* element, const ChVector<>& gacc) : m_element(element), m_gacc(gacc) {}
-    ~Brick9_Gravity() {}
+    ~Brick9_Gravity() override {}
 
   private:
     ChElementBrick_9* m_element;
     ChVector<> m_gacc;
 
-    virtual void Evaluate(ChVectorN<double, 33>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 33>& result, const double x, const double y, const double z) override;
 };
 
 // Evaluate integrand at the specified point
@@ -282,11 +282,11 @@ void ChElementBrick_9::ComputeGravityForce(const ChVector<>& g_acc) {
 class Brick9_Force : public ChIntegrable3D<ChVectorN<double, 33>> {
   public:
     Brick9_Force(ChElementBrick_9* element) : m_element(element) {}
-    ~Brick9_Force() {}
+    ~Brick9_Force() override {}
 
   private:
     ChElementBrick_9* m_element;
-    virtual void Evaluate(ChVectorN<double, 33>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 33>& result, const double x, const double y, const double z) override;
 };
 
 // Evaluate integrand at the specified point
@@ -1284,7 +1284,7 @@ class Brick9_Jacobian : public ChIntegrable3D<ChMatrixNM<double, 33, 33>> {
     ChMatrixNM<double, 33, 33> m_KTE1;
     ChMatrixNM<double, 33, 33> m_KTE2;
 
-    virtual void Evaluate(ChMatrixNM<double, 33, 33>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 33, 33>& result, const double x, const double y, const double z) override;
 };
 
 // Evaluate integrand at the specified point

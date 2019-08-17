@@ -217,7 +217,7 @@ void ChElementCableANCF::ComputeInternalJacobians(double Kfactor, double Rfactor
             ChMatrixNM<double, 4, 3>* d;
 
             // Evaluate ((strainD'*strainD)+(strain*Sd'*Sd)) at point x
-            virtual void Evaluate(ChMatrixNM<double, 12, 12>& result, const double x) {
+            void Evaluate(ChMatrixNM<double, 12, 12>& result, const double x) override {
                 ChElementCableANCF::ShapeVector Nd;
                 element->ShapeFunctionsDerivatives(Nd, x);
 
@@ -274,7 +274,7 @@ void ChElementCableANCF::ComputeInternalJacobians(double Kfactor, double Rfactor
             ChMatrixNM<double, 3, 12> fe1;
 
             // Evaluate  at point x
-            virtual void Evaluate(ChMatrixNM<double, 12, 12>& result, const double x) {
+            void Evaluate(ChMatrixNM<double, 12, 12>& result, const double x) override {
                 element->ShapeFunctionsDerivatives(Nd, x);
                 element->ShapeFunctionsDerivatives2(Ndd, x);
 
@@ -369,7 +369,7 @@ void ChElementCableANCF::ComputeMassMatrix() {
         ChElementCableANCF::ShapeVector N;
 
         // Evaluate the S'*S  at point x
-        virtual void Evaluate(ChMatrixNM<double, 12, 12>& result, const double x) {
+        void Evaluate(ChMatrixNM<double, 12, 12>& result, const double x) override {
             element->ShapeFunctions(N, x);
             // S=[N1*eye(3) N2*eye(3) N3*eye(3) N4*eye(3)]
             S.setZero();
@@ -502,7 +502,7 @@ void ChElementCableANCF::ComputeInternalForces_Impl(const ChVector<>& pA,
         ChMatrixNM<double, 1, 3> Nd_d;
 
         // Evaluate (strainD'*strain)  at point x
-        virtual void Evaluate(ChVectorN<double, 12>& result, const double x) override {
+        void Evaluate(ChVectorN<double, 12>& result, const double x) override {
             element->ShapeFunctionsDerivatives(Nd, x);
 
             // Sd=[Nd1*eye(3) Nd2*eye(3) Nd3*eye(3) Nd4*eye(3)]
@@ -562,7 +562,7 @@ void ChElementCableANCF::ComputeInternalForces_Impl(const ChVector<>& pA,
         ChMatrixNM<double, 3, 12> fe1;
 
         // Evaluate  at point x
-        virtual void Evaluate(ChVectorN<double, 12>& result, const double x) override {
+        void Evaluate(ChVectorN<double, 12>& result, const double x) override {
             element->ShapeFunctionsDerivatives(Nd, x);
             element->ShapeFunctionsDerivatives2(Ndd, x);
 

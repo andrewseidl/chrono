@@ -34,7 +34,7 @@ protected:
 
 public:
 
-	virtual ~btTriangleMeshShape();
+	~btTriangleMeshShape() override;
 
 	virtual btVector3 localGetSupportingVertex(const btVector3& vec) const;
 
@@ -46,14 +46,14 @@ public:
 
 	void	recalcLocalAabb();
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual void	setLocalScaling(const btVector3& scaling);
-	virtual const btVector3& getLocalScaling() const;
+	void	setLocalScaling(const btVector3& scaling) override;
+	const btVector3& getLocalScaling() const override;
 	
 	btStridingMeshInterface* getMeshInterface()
 	{
@@ -77,7 +77,7 @@ public:
 
 
 	//debugging
-	virtual const char*	getName()const {return "TRIANGLEMESH";}
+	const char*	getName()const override {return "TRIANGLEMESH";}
 
 	
 

@@ -41,21 +41,21 @@ public:
 	btBarrelShape(btScalar sY_low, btScalar sY_high, btScalar sR_vert, btScalar sR_hor, btScalar sR_offset );
 
 	///CollisionShape Interface
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	/// btConvexShape Interface
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 	
 	//virtual int	getShapeType() const { return BARREL_SHAPE_PROXYTYPE; }
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "BarrelShape";
 	}
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 	btScalar	getY_low() const {return Y_low;}
 	btScalar	getY_high() const {return Y_high;}

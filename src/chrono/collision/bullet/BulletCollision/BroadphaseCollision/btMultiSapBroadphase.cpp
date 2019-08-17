@@ -52,10 +52,10 @@ m_invalidPair(0)
 
 	struct btMultiSapOverlapFilterCallback : public btOverlapFilterCallback
 	{
-		virtual ~btMultiSapOverlapFilterCallback()
+		~btMultiSapOverlapFilterCallback() override
 		{}
 		// return true when pairs need collision
-		virtual bool	needBroadphaseCollision(btBroadphaseProxy* childProxy0,btBroadphaseProxy* childProxy1) const
+		bool	needBroadphaseCollision(btBroadphaseProxy* childProxy0,btBroadphaseProxy* childProxy1) const override
 		{
 			btBroadphaseProxy* multiProxy0 = (btBroadphaseProxy*)childProxy0->m_multiSapParentProxy;
 			btBroadphaseProxy* multiProxy1 = (btBroadphaseProxy*)childProxy1->m_multiSapParentProxy;
@@ -194,7 +194,7 @@ void	btMultiSapBroadphase::setAabb(btBroadphaseProxy* proxy,const btVector3& aab
 
 		}
 
-		virtual void processNode(int /*nodeSubPart*/, int broadphaseIndex)
+		void processNode(int /*nodeSubPart*/, int broadphaseIndex) override
 		{
 			btBroadphaseInterface* childBroadphase = m_multiSap->getBroadphaseArray()[broadphaseIndex];
 

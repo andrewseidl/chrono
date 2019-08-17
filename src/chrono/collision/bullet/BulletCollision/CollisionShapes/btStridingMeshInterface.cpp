@@ -157,7 +157,7 @@ void	btStridingMeshInterface::calculateAabbBruteForce(btVector3& aabbMin,btVecto
 			m_aabbMax.setValue(btScalar(-BT_LARGE_FLOAT),btScalar(-BT_LARGE_FLOAT),btScalar(-BT_LARGE_FLOAT));
 		}
 
-		virtual void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex)
+		void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex) override
 		{
 			(void)partId;
 			(void)triangleIndex;

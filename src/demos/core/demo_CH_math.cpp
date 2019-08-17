@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     // Define a y=f(x) function by inheriting ChIntegrable1D:
     class MySine1d : public ChIntegrable1D<double> {
       public:
-        void Evaluate(double& result, const double x) { result = sin(x); }
+        void Evaluate(double& result, const double x) override { result = sin(x); }
     };
 
     // Create an object from the function class
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
     // Other quadrature tests, this time in 2D
     class MySine2d : public ChIntegrable2D<double> {
       public:
-        void Evaluate(double& result, const double x, const double y) { result = sin(x); }
+        void Evaluate(double& result, const double x, const double y) override { result = sin(x); }
     };
 
     MySine2d mfx2d;
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
     // Other quadrature tests, this time with vector function (that is, integrates 2x1 matrix)
     class MySine2dM : public ChIntegrable2D<ChMatrixNM<double, 1, 2>> {
       public:
-        void Evaluate(ChMatrixNM<double, 1, 2>& result, const double x, const double y) {
+        void Evaluate(ChMatrixNM<double, 1, 2>& result, const double x, const double y) override {
             result(0, 0) = x * y;
             result(0, 1) = 0.5 * y * y;
         }

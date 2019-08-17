@@ -72,7 +72,7 @@ class dgPolyhedra: public dgTree <dgEdge, dgEdgeKey>
 
 	dgPolyhedra (void);
 	dgPolyhedra (const dgPolyhedra &polyhedra);
-	virtual ~dgPolyhedra();
+	~dgPolyhedra() override;
 
 	void BeginFace();
 	dgEdge* AddFace (hacd::HaI32 v0, hacd::HaI32 v1, hacd::HaI32 v2);

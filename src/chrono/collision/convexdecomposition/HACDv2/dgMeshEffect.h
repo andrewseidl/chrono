@@ -125,7 +125,7 @@ class dgMeshEffect: public dgPolyhedra, public dgRefCounter, public UANS::UserAl
 
 	// create a planar Mesh
 	dgMeshEffect(const dgMatrix& planeMatrix, hacd::HaF32 witdth, hacd::HaF32 breadth, hacd::HaI32 material, const dgMatrix& textureMatrix0, const dgMatrix& textureMatrix1);
-	virtual ~dgMeshEffect(void);
+	~dgMeshEffect(void) override;
 
 	dgMatrix CalculateOOBB (dgBigVector& size) const;
 	void CalculateAABB (dgBigVector& min, dgBigVector& max) const;

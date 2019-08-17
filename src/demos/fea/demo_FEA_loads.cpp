@@ -142,19 +142,19 @@ void test_1() {
         // This is the function that you have to implement. It should return the
         // load at U. For Eulero beams, loads are expected as 6-rows vectors, containing
         // a wrench: forceX, forceY, forceZ, torqueX, torqueY, torqueZ.
-        virtual void ComputeF(
+        void ComputeF(
             const double U,              ///< parametric coordinate in line
             ChVectorDynamic<>& F,        ///< Result F vector here, size must be = n.field coords.of loadable
             ChVectorDynamic<>* state_x,  ///< if != 0, update state (pos. part) to this, then evaluate F
             ChVectorDynamic<>* state_w   ///< if != 0, update state (speed part) to this, then evaluate F
-            ) {
+            ) override {
             double Fy_max = 0.005;
             F.segment(0, 3) = ChVector<>(0, ((1 + U) / 2) * Fy_max, 0).eigen();  // load, force part
             F.segment(3, 3).setZero();                                             // load, torque part
         }
 
         // Needed because inheriting ChLoaderUdistributed. Use 1 because linear load fx.
-        virtual int GetIntegrationPointsU() { return 1; }
+        int GetIntegrationPointsU() override { return 1; }
     };
 
     // Create the load (and handle it with a shared pointer).
@@ -181,14 +181,14 @@ void test_1() {
         // This is the function that you have to implement. It should return the F load at U,V,W.
         // For ChNodeFEAxyz, loads are expected as 3-rows vectors, containing F absolute force.
         // As this is a stiff force field, dependency from state_x and state_y must be considered.
-        virtual void ComputeF(
+        void ComputeF(
             const double U,
             const double V,
             const double W,
             ChVectorDynamic<>& F,        ///< Result F vector here, size must be = n.field coords.of loadable
             ChVectorDynamic<>* state_x,  ///< if != 0, update state (pos. part) to this, then evaluate F
             ChVectorDynamic<>* state_w   ///< if != 0, update state (speed part) to this, then evaluate F
-            ) {
+            ) override {
             ChVector<> node_pos;
             ChVector<> node_vel;
             if (state_x) {
@@ -216,7 +216,7 @@ void test_1() {
         }
 
         // Remember to set this as stiff, to enable the jacobians
-        virtual bool IsStiff() { return true; }
+        bool IsStiff() override { return true; }
     };
 
     // Instance a ChLoad object, applying to a node, and passing a ChLoader as a template
@@ -240,14 +240,14 @@ void test_1() {
         MyLoadCustom(std::shared_ptr<ChLoadableUVW> mloadable) : ChLoadCustom(mloadable){};
 
         /// "Virtual" copy constructor (covariant return type).
-        virtual MyLoadCustom* Clone() const override { return new MyLoadCustom(*this); }
+        MyLoadCustom* Clone() const override { return new MyLoadCustom(*this); }
 
         // Compute Q=Q(x,v)
         // This is the function that you have to implement. It should return the generalized Q load
         // (i.e.the force in generalized lagrangian coordinates).
         // For ChNodeFEAxyz, Q loads are expected as 3-rows vectors, containing absolute force x,y,z.
         // As this is a stiff force field, dependency from state_x and state_y must be considered.
-        virtual void ComputeQ(ChState* state_x,      ///< state position to evaluate Q
+        void ComputeQ(ChState* state_x,      ///< state position to evaluate Q
                               ChStateDelta* state_w  ///< state speed to evaluate Q
                               ) override {
             ChVector<> node_pos;
@@ -278,7 +278,7 @@ void test_1() {
 
         // OPTIONAL: if you want to provide an analytical jacobian, that might avoid the lengthy and approximate
         // default numerical jacobian, just implement the following:
-        virtual void ComputeJacobian(ChState* state_x,       ///< state position to evaluate jacobians
+        void ComputeJacobian(ChState* state_x,       ///< state position to evaluate jacobians
                                      ChStateDelta* state_w,  ///< state speed to evaluate jacobians
                                      ChMatrixRef mK,         ///< result dQ/dx
                                      ChMatrixRef mR,         ///< result dQ/dv
@@ -291,7 +291,7 @@ void test_1() {
         }
 
         // Remember to set this as stiff, to enable the jacobians
-        virtual bool IsStiff() override { return true; }
+        bool IsStiff() override { return true; }
     };
 
     // Instance load object, applying to a node, as in previous example, and add to container:
@@ -318,7 +318,7 @@ void test_1() {
         MyLoadCustomMultiple(std::vector<std::shared_ptr<ChLoadable>>& mloadables) : ChLoadCustomMultiple(mloadables){};
 
         /// "Virtual" copy constructor (covariant return type).
-        virtual MyLoadCustomMultiple* Clone() const override { return new MyLoadCustomMultiple(*this); }
+        MyLoadCustomMultiple* Clone() const override { return new MyLoadCustomMultiple(*this); }
 
         // Compute Q=Q(x,v)
         // This is the function that you have to implement. It should return the generalized Q load
@@ -327,7 +327,7 @@ void test_1() {
         // all the vectors (load_Q, state_x, state_w) are split in the same order that the loadable objects
         // are added to MyLoadCustomMultiple; in this case for instance Q={Efx,Efy,Efz,Ffx,Ffy,Ffz}.
         // As this is a stiff force field, dependency from state_x and state_y must be considered.
-        virtual void ComputeQ(ChState* state_x,      ///< state position to evaluate Q
+        void ComputeQ(ChState* state_x,      ///< state position to evaluate Q
                               ChStateDelta* state_w  ///< state speed to evaluate Q
                               ) override {
             ChVector<> Enode_pos;
@@ -377,7 +377,7 @@ void test_1() {
         //   virtual void ComputeJacobian(...)
 
         // Remember to set this as stiff, to enable the jacobians
-        virtual bool IsStiff() override { return true; }
+        bool IsStiff() override { return true; }
     };
 
     // Instance load object. This require a list of ChLoadable objects

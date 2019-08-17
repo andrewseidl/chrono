@@ -205,12 +205,12 @@ void ChElementShellANCF_8::ComputeMmatrixGlobal(ChMatrixRef M) {
 class ShellANCF8_Mass : public ChIntegrable3D<ChMatrixNM<double, 72, 72>> {
   public:
     ShellANCF8_Mass(ChElementShellANCF_8* element) : m_element(element) {}
-    ~ShellANCF8_Mass() {}
+    ~ShellANCF8_Mass() override {}
 
   private:
     ChElementShellANCF_8* m_element;
 
-    virtual void Evaluate(ChMatrixNM<double, 72, 72>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 72, 72>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF8_Mass::Evaluate(ChMatrixNM<double, 72, 72>& result, const double x, const double y, const double z) {
@@ -286,13 +286,13 @@ void ChElementShellANCF_8::ComputeNodalMass() {
 class ShellANCF8_Gravity : public ChIntegrable3D<ChVectorN<double, 72>> {
   public:
     ShellANCF8_Gravity(ChElementShellANCF_8* element, const ChVector<> gacc) : m_element(element), m_gacc(gacc) {}
-    ~ShellANCF8_Gravity() {}
+    ~ShellANCF8_Gravity() override {}
 
   private:
     ChElementShellANCF_8* m_element;
     ChVector<> m_gacc;
 
-    virtual void Evaluate(ChVectorN<double, 72>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 72>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF8_Gravity::Evaluate(ChVectorN<double, 72>& result, const double x, const double y, const double z) {
@@ -345,14 +345,14 @@ class ShellANCF8_Force : public ChIntegrable3D<ChVectorN<double, 72>> {
                      size_t kl                       // Current layer index
                      )
         : m_element(element), m_kl(kl) {}
-    ~ShellANCF8_Force() {}
+    ~ShellANCF8_Force() override {}
 
   private:
     ChElementShellANCF_8* m_element;
     size_t m_kl;
 
     /// Evaluate (strainD'*strain)  at point x
-    virtual void Evaluate(ChVectorN<double, 72>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 72>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF8_Force::Evaluate(ChVectorN<double, 72>& result, const double x, const double y, const double z) {
@@ -646,7 +646,7 @@ class ShellANCF8_Jacobian : public ChIntegrable3D<ChVectorN<double, 5184>> {
     size_t m_kl;
 
     // Evaluate integrand at the specified point.
-    virtual void Evaluate(ChVectorN<double, 5184>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 5184>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF8_Jacobian::Evaluate(ChVectorN<double, 5184>& result, const double x, const double y, const double z) {

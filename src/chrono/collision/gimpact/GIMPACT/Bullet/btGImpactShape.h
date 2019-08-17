@@ -130,7 +130,7 @@ public:
     /*!
     \post Calls updateBound() for update the box set.
     */
-    void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
+    void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override
     {
         btAABB transformedbox = m_localAABB;
         transformedbox.appy_transform(t);
@@ -159,19 +159,19 @@ public:
     /*!
 	\post You must call updateBound() for update the box set.
 	*/
-	virtual void	setLocalScaling(const btVector3& scaling)
+	void	setLocalScaling(const btVector3& scaling) override
 	{
 		localScaling = scaling;
 		postUpdate();
 	}
 
-	virtual const btVector3& getLocalScaling() const
+	const btVector3& getLocalScaling() const override
 	{
 		return localScaling;
 	}
 
 
-	virtual void setMargin(btScalar margin)
+	void setMargin(btScalar margin) override
     {
     	m_collisionMargin = margin;
     	int i = getNumChildShapes();
@@ -282,7 +282,7 @@ public:
 	/*!
 	It gives the triangles in local space
 	*/
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override
 	{
 	}
 
@@ -302,7 +302,7 @@ public:
 	class CompoundPrimitiveManager:public btPrimitiveManagerBase
 	{
 	public:
-		virtual ~CompoundPrimitiveManager() {}
+		~CompoundPrimitiveManager() override {}
 		btGImpactCompoundShape * m_compoundShape;
 
 
@@ -321,17 +321,17 @@ public:
 			m_compoundShape = NULL;
 		}
 
-		virtual bool is_trimesh() const
+		bool is_trimesh() const override
 		{
 			return false;
 		}
 
-		virtual int get_primitive_count() const
+		int get_primitive_count() const override
 		{
 			return (int )m_compoundShape->getNumChildShapes();
 		}
 
-		virtual void get_primitive_box(int prim_index ,btAABB & primbox) const
+		void get_primitive_box(int prim_index ,btAABB & primbox) const override
 		{
 			btTransform prim_trans;
 			if(m_compoundShape->childrenHasTransform())
@@ -346,7 +346,7 @@ public:
 			shape->getAabb(prim_trans,primbox.m_min,primbox.m_max);
 		}
 
-		virtual void get_primitive_triangle(int prim_index,btPrimitiveTriangle & triangle) const
+		void get_primitive_triangle(int prim_index,btPrimitiveTriangle & triangle) const override
 		{
 			btAssert(0);
 		}
@@ -369,13 +369,13 @@ public:
 		m_box_set.setPrimitiveManager(&m_primitive_manager);
 	}
 
-	virtual ~btGImpactCompoundShape()
+	~btGImpactCompoundShape() override
 	{
 	}
 
 
 	//! if true, then its children must get transforms.
-	virtual bool childrenHasTransform() const
+	bool childrenHasTransform() const override
 	{
 		if(m_childTransforms.size()==0) return false;
 		return true;
@@ -383,7 +383,7 @@ public:
 
 
 	//! Obtains the primitive manager
-	virtual const btPrimitiveManagerBase * getPrimitiveManager()  const
+	const btPrimitiveManagerBase * getPrimitiveManager()  const override
 	{
 		return &m_primitive_manager;
 	}
@@ -395,7 +395,7 @@ public:
 	}
 
 	//! Gets the number of children
-	virtual int	getNumChildShapes() const
+	int	getNumChildShapes() const override
 	{
 		return m_childShapes.size();
 	}
@@ -417,13 +417,13 @@ public:
 	}
 
 	//! Gets the children
-	virtual btCollisionShape* getChildShape(int index)
+	btCollisionShape* getChildShape(int index) override
 	{
 		return m_childShapes[index];
 	}
 
 	//! Gets the children
-	virtual const btCollisionShape* getChildShape(int index) const
+	const btCollisionShape* getChildShape(int index) const override
 	{
 		return m_childShapes[index];
 	}
@@ -431,7 +431,7 @@ public:
 	//! Retrieves the bound from a child
     /*!
     */
-    virtual void getChildAabb(int child_index,const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
+    void getChildAabb(int child_index,const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override
     {
 
     	if(childrenHasTransform())
@@ -446,7 +446,7 @@ public:
 
 
 	//! Gets the children transform
-	virtual btTransform	getChildTransform(int index) const
+	btTransform	getChildTransform(int index) const override
 	{
 		btAssert(m_childTransforms.size() == m_childShapes.size());
 		return m_childTransforms[index];
@@ -456,7 +456,7 @@ public:
 	/*!
 	\post You must call updateBound() for update the box set.
 	*/
-	virtual void setChildTransform(int index, const btTransform & transform)
+	void setChildTransform(int index, const btTransform & transform) override
 	{
 		btAssert(m_childTransforms.size() == m_childShapes.size());
 		m_childTransforms[index] = transform;
@@ -464,38 +464,38 @@ public:
 	}
 
 	//! Determines if this shape has triangles
-	virtual bool needsRetrieveTriangles() const
+	bool needsRetrieveTriangles() const override
 	{
 		return false;
 	}
 
 	//! Determines if this shape has tetrahedrons
-	virtual bool needsRetrieveTetrahedrons() const
+	bool needsRetrieveTetrahedrons() const override
 	{
 		return false;
 	}
 
 
-	virtual void getBulletTriangle(int prim_index,btTriangleShapeEx & triangle) const
+	void getBulletTriangle(int prim_index,btTriangleShapeEx & triangle) const override
 	{
 		btAssert(0);
 	}
 
-	virtual void getBulletTetrahedron(int prim_index,btTetrahedronShapeEx & tetrahedron) const
+	void getBulletTetrahedron(int prim_index,btTetrahedronShapeEx & tetrahedron) const override
 	{
 		btAssert(0);
 	}
 
 
 	//! Calculates the exact inertia tensor for this shape
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "GImpactCompound";
 	}
 
-	virtual eGIMPACT_SHAPE_TYPE getGImpactShapeType()
+	eGIMPACT_SHAPE_TYPE getGImpactShapeType() override
 	{
 		return CONST_GIMPACT_COMPOUND_SHAPE;
 	}
@@ -583,7 +583,7 @@ public:
 
 		}
 
-		virtual ~TrimeshPrimitiveManager() {}
+		~TrimeshPrimitiveManager() override {}
 
 		void lock()
 		{
@@ -612,12 +612,12 @@ public:
 			m_lock_count = 0;
 		}
 
-		virtual bool is_trimesh() const
+		bool is_trimesh() const override
 		{
 			return true;
 		}
 
-		virtual int get_primitive_count() const
+		int get_primitive_count() const override
 		{
 			return (int )numfaces;
 		}
@@ -663,7 +663,7 @@ public:
 			}
 		}
 
-		virtual void get_primitive_box(int prim_index ,btAABB & primbox) const
+		void get_primitive_box(int prim_index ,btAABB & primbox) const override
 		{
 			btPrimitiveTriangle  triangle;
 			get_primitive_triangle(prim_index,triangle);
@@ -672,7 +672,7 @@ public:
 				triangle.m_vertices[1],triangle.m_vertices[2],triangle.m_margin);
 		}
 
-		virtual void get_primitive_triangle(int prim_index,btPrimitiveTriangle & triangle) const
+		void get_primitive_triangle(int prim_index,btPrimitiveTriangle & triangle) const override
 		{
 			int indices[3];
 			get_indices(prim_index,indices[0],indices[1],indices[2]);
@@ -712,26 +712,26 @@ public:
 		m_box_set.setPrimitiveManager(&m_primitive_manager);
 	}
 
-	virtual ~btGImpactMeshShapePart()
+	~btGImpactMeshShapePart() override
 	{
 	}
 
 	//! if true, then its children must get transforms.
-	virtual bool childrenHasTransform() const
+	bool childrenHasTransform() const override
 	{
 		return false;
 	}
 
 
 	//! call when reading child shapes
-	virtual void lockChildShapes() const
+	void lockChildShapes() const override
 	{
 		void * dummy = (void*)(m_box_set.getPrimitiveManager());
 		TrimeshPrimitiveManager * dummymanager = static_cast<TrimeshPrimitiveManager *>(dummy);
 		dummymanager->lock();
 	}
 
-	virtual void unlockChildShapes()  const
+	void unlockChildShapes()  const override
 	{
 		void * dummy = (void*)(m_box_set.getPrimitiveManager());
 		TrimeshPrimitiveManager * dummymanager = static_cast<TrimeshPrimitiveManager *>(dummy);
@@ -739,14 +739,14 @@ public:
 	}
 
 	//! Gets the number of children
-	virtual int	getNumChildShapes() const
+	int	getNumChildShapes() const override
 	{
 		return m_primitive_manager.get_primitive_count();
 	}
 
 
 	//! Gets the children
-	virtual btCollisionShape* getChildShape(int index)
+	btCollisionShape* getChildShape(int index) override
 	{
 		btAssert(0);
 		return NULL;
@@ -755,14 +755,14 @@ public:
 
 
 	//! Gets the child
-	virtual const btCollisionShape* getChildShape(int index) const
+	const btCollisionShape* getChildShape(int index) const override
 	{
 		btAssert(0);
 		return NULL;
 	}
 
 	//! Gets the children transform
-	virtual btTransform	getChildTransform(int index) const
+	btTransform	getChildTransform(int index) const override
 	{
 		btAssert(0);
 		return btTransform();
@@ -772,14 +772,14 @@ public:
 	/*!
 	\post You must call updateBound() for update the box set.
 	*/
-	virtual void setChildTransform(int index, const btTransform & transform)
+	void setChildTransform(int index, const btTransform & transform) override
 	{
 		btAssert(0);
 	}
 
 
 	//! Obtains the primitive manager
-	virtual const btPrimitiveManagerBase * getPrimitiveManager()  const
+	const btPrimitiveManagerBase * getPrimitiveManager()  const override
 	{
 		return &m_primitive_manager;
 	}
@@ -793,39 +793,39 @@ public:
 
 
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 
 
 
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "GImpactMeshShapePart";
 	}
 
-	virtual eGIMPACT_SHAPE_TYPE getGImpactShapeType()
+	eGIMPACT_SHAPE_TYPE getGImpactShapeType() override
 	{
 		return CONST_GIMPACT_TRIMESH_SHAPE_PART;
 	}
 
 	//! Determines if this shape has triangles
-	virtual bool needsRetrieveTriangles() const
+	bool needsRetrieveTriangles() const override
 	{
 		return true;
 	}
 
 	//! Determines if this shape has tetrahedrons
-	virtual bool needsRetrieveTetrahedrons() const
+	bool needsRetrieveTetrahedrons() const override
 	{
 		return false;
 	}
 
-	virtual void getBulletTriangle(int prim_index,btTriangleShapeEx & triangle) const
+	void getBulletTriangle(int prim_index,btTriangleShapeEx & triangle) const override
 	{
 		m_primitive_manager.get_bullet_triangle(prim_index,triangle);
 	}
 
-	virtual void getBulletTetrahedron(int prim_index,btTetrahedronShapeEx & tetrahedron) const
+	void getBulletTetrahedron(int prim_index,btTetrahedronShapeEx & tetrahedron) const override
 	{
 		btAssert(0);
 	}
@@ -842,24 +842,24 @@ public:
 		m_primitive_manager.get_vertex(vertex_index,vertex);
 	}
 
-	SIMD_FORCE_INLINE void setMargin(btScalar margin)
+	SIMD_FORCE_INLINE void setMargin(btScalar margin) override
     {
     	m_primitive_manager.m_margin = margin;
     	postUpdate();
     }
 
-    SIMD_FORCE_INLINE btScalar getMargin() const
+    SIMD_FORCE_INLINE btScalar getMargin() const override
     {
     	return m_primitive_manager.m_margin;
     }
 
-    virtual void	setLocalScaling(const btVector3& scaling)
+    void	setLocalScaling(const btVector3& scaling) override
     {
     	m_primitive_manager.m_scale = scaling;
     	postUpdate();
     }
 
-    virtual const btVector3& getLocalScaling() const
+    const btVector3& getLocalScaling() const override
     {
     	return m_primitive_manager.m_scale;
     }
@@ -869,7 +869,7 @@ public:
     	return (int)m_primitive_manager.m_part;
     }
 
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 };
 
 
@@ -897,7 +897,7 @@ protected:
 	}
 
 	//! use this function for perfofm refit in bounding boxes
-    virtual void calcLocalAABB()
+    void calcLocalAABB() override
     {
     	m_localAABB.invalidate();
     	int i = m_mesh_parts.size();
@@ -915,7 +915,7 @@ public:
 		buildMeshParts(meshInterface);
 	}
 
-	virtual ~btGImpactMeshShape()
+	~btGImpactMeshShape() override
 	{
 		int i = m_mesh_parts.size();
     	while(i--)
@@ -955,7 +955,7 @@ public:
 	}
 
 
-	virtual void	setLocalScaling(const btVector3& scaling)
+	void	setLocalScaling(const btVector3& scaling) override
 	{
 		localScaling = scaling;
 
@@ -969,7 +969,7 @@ public:
 		m_needs_update = true;
 	}
 
-	virtual void setMargin(btScalar margin)
+	void setMargin(btScalar margin) override
     {
     	m_collisionMargin = margin;
 
@@ -984,7 +984,7 @@ public:
     }
 
 	//! Tells to this object that is needed to refit all the meshes
-    virtual void postUpdate()
+    void postUpdate() override
     {
 		int i = m_mesh_parts.size();
     	while(i--)
@@ -996,11 +996,11 @@ public:
     	m_needs_update = true;
     }
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 
 	//! Obtains the primitive manager
-	virtual const btPrimitiveManagerBase * getPrimitiveManager()  const
+	const btPrimitiveManagerBase * getPrimitiveManager()  const override
 	{
 		btAssert(0);
 		return NULL;
@@ -1008,7 +1008,7 @@ public:
 
 
 	//! Gets the number of children
-	virtual int	getNumChildShapes() const
+	int	getNumChildShapes() const override
 	{
 		btAssert(0);
 		return 0;
@@ -1016,43 +1016,43 @@ public:
 
 
 	//! if true, then its children must get transforms.
-	virtual bool childrenHasTransform() const
+	bool childrenHasTransform() const override
 	{
 		btAssert(0);
 		return false;
 	}
 
 	//! Determines if this shape has triangles
-	virtual bool needsRetrieveTriangles() const
+	bool needsRetrieveTriangles() const override
 	{
 		btAssert(0);
 		return false;
 	}
 
 	//! Determines if this shape has tetrahedrons
-	virtual bool needsRetrieveTetrahedrons() const
+	bool needsRetrieveTetrahedrons() const override
 	{
 		btAssert(0);
 		return false;
 	}
 
-	virtual void getBulletTriangle(int prim_index,btTriangleShapeEx & triangle) const
+	void getBulletTriangle(int prim_index,btTriangleShapeEx & triangle) const override
 	{
 		btAssert(0);
 	}
 
-	virtual void getBulletTetrahedron(int prim_index,btTetrahedronShapeEx & tetrahedron) const
+	void getBulletTetrahedron(int prim_index,btTetrahedronShapeEx & tetrahedron) const override
 	{
 		btAssert(0);
 	}
 
 	//! call when reading child shapes
-	virtual void lockChildShapes() const
+	void lockChildShapes() const override
 	{
 		btAssert(0);
 	}
 
-	virtual void unlockChildShapes() const
+	void unlockChildShapes() const override
 	{
 		btAssert(0);
 	}
@@ -1063,13 +1063,13 @@ public:
 	//! Retrieves the bound from a child
     /*!
     */
-    virtual void getChildAabb(int child_index,const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
+    void getChildAabb(int child_index,const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override
     {
         btAssert(0);
     }
 
 	//! Gets the children
-	virtual btCollisionShape* getChildShape(int index)
+	btCollisionShape* getChildShape(int index) override
 	{
 		btAssert(0);
 		return NULL;
@@ -1077,14 +1077,14 @@ public:
 
 
 	//! Gets the child
-	virtual const btCollisionShape* getChildShape(int index) const
+	const btCollisionShape* getChildShape(int index) const override
 	{
 		btAssert(0);
 		return NULL;
 	}
 
 	//! Gets the children transform
-	virtual btTransform	getChildTransform(int index) const
+	btTransform	getChildTransform(int index) const override
 	{
 		btAssert(0);
 		return btTransform();
@@ -1094,30 +1094,30 @@ public:
 	/*!
 	\post You must call updateBound() for update the box set.
 	*/
-	virtual void setChildTransform(int index, const btTransform & transform)
+	void setChildTransform(int index, const btTransform & transform) override
 	{
 		btAssert(0);
 	}
 
 
-	virtual eGIMPACT_SHAPE_TYPE getGImpactShapeType()
+	eGIMPACT_SHAPE_TYPE getGImpactShapeType() override
 	{
 		return CONST_GIMPACT_TRIMESH_SHAPE;
 	}
 
 
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "GImpactMesh";
 	}
 
-	virtual void rayTest(const btVector3& rayFrom, const btVector3& rayTo, btCollisionWorld::RayResultCallback& resultCallback)  const;
+	void rayTest(const btVector3& rayFrom, const btVector3& rayTo, btCollisionWorld::RayResultCallback& resultCallback)  const override;
 
 	//! Function for retrieve triangles.
 	/*!
 	It gives the triangles in local space
 	*/
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 };
 
 

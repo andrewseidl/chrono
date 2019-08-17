@@ -52,7 +52,7 @@ void btOptimizedBvh::build(btStridingMeshInterface* triangles, bool useQuantized
 		{
 		}
 
-		virtual void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex)
+		void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex) override
 		{
 			btOptimizedBvhNode node;
 			btVector3	aabbMin,aabbMax;
@@ -94,7 +94,7 @@ void btOptimizedBvh::build(btStridingMeshInterface* triangles, bool useQuantized
 		{
 		}
 
-		virtual void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex)
+		void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex) override
 		{
 			// The partId and triangle index must fit in the same (positive) integer
 			btAssert(partId < (1<<MAX_NUM_PARTS_IN_BITS));

@@ -126,12 +126,12 @@ void ChElementBeamANCF::ComputeMmatrixGlobal(ChMatrixRef M) {
 class BeamANCF_Mass : public ChIntegrable3D<ChMatrixNM<double, 27, 27>> {
   public:
     BeamANCF_Mass(ChElementBeamANCF* element) : m_element(element) {}
-    ~BeamANCF_Mass() {}
+    ~BeamANCF_Mass() override {}
 
   private:
     ChElementBeamANCF* m_element;
 
-    virtual void Evaluate(ChMatrixNM<double, 27, 27>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 27, 27>& result, const double x, const double y, const double z) override;
 };
 
 void BeamANCF_Mass::Evaluate(ChMatrixNM<double, 27, 27>& result, const double x, const double y, const double z) {
@@ -189,13 +189,13 @@ void ChElementBeamANCF::ComputeNodalMass() {
 class BeamANCF_Gravity : public ChIntegrable3D<ChVectorN<double, 27>> {
   public:
     BeamANCF_Gravity(ChElementBeamANCF* element, const ChVector<> gacc) : m_element(element), m_gacc(gacc) {}
-    ~BeamANCF_Gravity() {}
+    ~BeamANCF_Gravity() override {}
 
   private:
     ChElementBeamANCF* m_element;
     ChVector<> m_gacc;
 
-    virtual void Evaluate(ChVectorN<double, 27>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 27>& result, const double x, const double y, const double z) override;
 };
 
 void BeamANCF_Gravity::Evaluate(ChVectorN<double, 27>& result, const double x, const double y, const double z) {
@@ -246,13 +246,13 @@ void ChElementBeamANCF::ComputeGravityForce(const ChVector<>& g_acc) {
 class BeamANCF_Force : public ChIntegrable3D<ChVectorN<double, 27>> {
   public:
     BeamANCF_Force(ChElementBeamANCF* element) : m_element(element) {}
-    ~BeamANCF_Force() {}
+    ~BeamANCF_Force() override {}
 
   private:
     ChElementBeamANCF* m_element;
 
     /// Evaluate (strainD'*strain)  at point x, include ANS and EAS.
-    virtual void Evaluate(ChVectorN<double, 27>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 27>& result, const double x, const double y, const double z) override;
 };
 
 void BeamANCF_Force::Evaluate(ChVectorN<double, 27>& result, const double x, const double y, const double z) {
@@ -506,13 +506,13 @@ void BeamANCF_Force::Evaluate(ChVectorN<double, 27>& result, const double x, con
 class BeamANCF_ForceNu : public ChIntegrable1D<ChVectorN<double, 27>> {
   public:
     BeamANCF_ForceNu(ChElementBeamANCF* element) : m_element(element) {}
-    ~BeamANCF_ForceNu() {}
+    ~BeamANCF_ForceNu() override {}
 
   private:
     ChElementBeamANCF* m_element;
 
     /// Evaluate (strainD'*strain)  at point x
-    virtual void Evaluate(ChVectorN<double, 27>& result, const double x) override;
+    void Evaluate(ChVectorN<double, 27>& result, const double x) override;
 };
 
 void BeamANCF_ForceNu::Evaluate(ChVectorN<double, 27>& result, const double x) {
@@ -814,7 +814,7 @@ class BeamANCF_Jacobian : public ChIntegrable3D<ChMatrixNM<double, 27, 27>> {
     double m_Rfactor;
 
     // Evaluate integrand at the specified point.
-    virtual void Evaluate(ChMatrixNM<double, 27, 27>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 27, 27>& result, const double x, const double y, const double z) override;
 };
 
 void BeamANCF_Jacobian::Evaluate(ChMatrixNM<double, 27, 27>& result, const double x, const double y, const double z) {
@@ -1134,7 +1134,7 @@ class BeamANCF_JacobianNu : public ChIntegrable1D<ChMatrixNM<double, 27, 27>> {
     double m_Rfactor;
 
     // Evaluate integrand at the specified point.
-    virtual void Evaluate(ChMatrixNM<double, 27, 27>& result, const double x) override;
+    void Evaluate(ChMatrixNM<double, 27, 27>& result, const double x) override;
 };
 
 void BeamANCF_JacobianNu::Evaluate(ChMatrixNM<double, 27, 27>& result, const double x) {

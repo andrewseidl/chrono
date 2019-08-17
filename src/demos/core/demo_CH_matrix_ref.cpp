@@ -41,7 +41,7 @@ class DerivedClass1 : public BaseClass {
         m_A.setRandom();
     }
     //virtual ChMatrixConstRef GetA() const override { m_A; }
-    virtual ChMatrixRef GetA() override { return m_A; }
+    ChMatrixRef GetA() override { return m_A; }
 
   private:
     ChMatrixDynamic<double> m_A;
@@ -51,7 +51,7 @@ class DerivedClass2 : public BaseClass {
   public:
     DerivedClass2() { m_A.setRandom(); }
     //virtual ChMatrixConstRef GetA() const override { return m_A; }
-    virtual ChMatrixRef GetA() override { return m_A; }
+    ChMatrixRef GetA() override { return m_A; }
 
   private:
     ChMatrixNM<double, 2, 3> m_A;

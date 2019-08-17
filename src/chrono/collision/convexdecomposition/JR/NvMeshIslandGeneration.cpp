@@ -366,14 +366,14 @@ public:
     mIslands.clear();
   }
 
-  NxU32 islandGenerate(NxU32 tcount,const NxU32 *indices,const NxF64 *vertices)
+  NxU32 islandGenerate(NxU32 tcount,const NxU32 *indices,const NxF64 *vertices) override
   {
     mVerticesDouble = vertices;
     mVerticesFloat  = 0;
     return islandGenerate(tcount,indices);
   }
 
-  NxU32 islandGenerate(NxU32 tcount,const NxU32 *indices,const NxF32 *vertices)
+  NxU32 islandGenerate(NxU32 tcount,const NxU32 *indices,const NxF32 *vertices) override
   {
     mVerticesDouble = 0;
     mVerticesFloat  = vertices;
@@ -470,7 +470,7 @@ public:
     return ret;
   }
 
-  NxU32 *   getIsland(NxU32 index,NxU32 &otcount)
+  NxU32 *   getIsland(NxU32 index,NxU32 &otcount) override
   {
     NxU32 *ret  = 0;
 
@@ -593,14 +593,14 @@ private:
     mEdgeCheckQueue.pushBack(ec);
   }
 
-  NxU32 mergeCoplanarIslands(const NxF32 *vertices)
+  NxU32 mergeCoplanarIslands(const NxF32 *vertices) override
   {
     mVerticesFloat = vertices;
     mVerticesDouble = 0;
     return mergeCoplanarIslands();
   }
 
-  NxU32 mergeCoplanarIslands(const NxF64 *vertices)
+  NxU32 mergeCoplanarIslands(const NxF64 *vertices) override
   {
     mVerticesDouble = vertices;
     mVerticesFloat = 0;
@@ -741,14 +741,14 @@ private:
     return ret;
   }
 
-  NxU32 mergeTouchingIslands(const NxF32 *vertices)
+  NxU32 mergeTouchingIslands(const NxF32 *vertices) override
   {
     NxU32 ret = 0;
 
     return ret;
   }
 
-  NxU32 mergeTouchingIslands(const NxF64 *vertices)
+  NxU32 mergeTouchingIslands(const NxF64 *vertices) override
   {
     NxU32 ret = 0;
 

@@ -109,7 +109,7 @@ protected:
 	}
 
 	///reset broadphase internal structures, to ensure determinism/reproducability
-	virtual void resetPool(btDispatcher* dispatcher);
+	void resetPool(btDispatcher* dispatcher) override;
 
 
 	void	validate();
@@ -121,28 +121,28 @@ protected:
 
 public:
 	btSimpleBroadphase(int maxProxies=16384,btOverlappingPairCache* overlappingPairCache=0);
-	virtual ~btSimpleBroadphase();
+	~btSimpleBroadphase() override;
 
 
 		static bool	aabbOverlap(btSimpleBroadphaseProxy* proxy0,btSimpleBroadphaseProxy* proxy1);
 
 
-	virtual btBroadphaseProxy*	createProxy(  const btVector3& aabbMin,  const btVector3& aabbMax,int shapeType,void* userPtr ,short int collisionFilterGroup,short int collisionFilterMask, btDispatcher* dispatcher,void* multiSapProxy);
+	btBroadphaseProxy*	createProxy(  const btVector3& aabbMin,  const btVector3& aabbMax,int shapeType,void* userPtr ,short int collisionFilterGroup,short int collisionFilterMask, btDispatcher* dispatcher,void* multiSapProxy) override;
 
-	virtual void	calculateOverlappingPairs(btDispatcher* dispatcher);
+	void	calculateOverlappingPairs(btDispatcher* dispatcher) override;
 
-	virtual void	destroyProxy(btBroadphaseProxy* proxy,btDispatcher* dispatcher);
-	virtual void	setAabb(btBroadphaseProxy* proxy,const btVector3& aabbMin,const btVector3& aabbMax, btDispatcher* dispatcher);
-	virtual void	getAabb(btBroadphaseProxy* proxy,btVector3& aabbMin, btVector3& aabbMax ) const;
+	void	destroyProxy(btBroadphaseProxy* proxy,btDispatcher* dispatcher) override;
+	void	setAabb(btBroadphaseProxy* proxy,const btVector3& aabbMin,const btVector3& aabbMax, btDispatcher* dispatcher) override;
+	void	getAabb(btBroadphaseProxy* proxy,btVector3& aabbMin, btVector3& aabbMax ) const override;
 
-	virtual void	rayTest(const btVector3& rayFrom,const btVector3& rayTo, btBroadphaseRayCallback& rayCallback, const btVector3& aabbMin=btVector3(0,0,0),const btVector3& aabbMax=btVector3(0,0,0));
-	virtual void	aabbTest(const btVector3& aabbMin, const btVector3& aabbMax, btBroadphaseAabbCallback& callback);
+	void	rayTest(const btVector3& rayFrom,const btVector3& rayTo, btBroadphaseRayCallback& rayCallback, const btVector3& aabbMin=btVector3(0,0,0),const btVector3& aabbMax=btVector3(0,0,0)) override;
+	void	aabbTest(const btVector3& aabbMin, const btVector3& aabbMax, btBroadphaseAabbCallback& callback) override;
 		
-	btOverlappingPairCache*	getOverlappingPairCache()
+	btOverlappingPairCache*	getOverlappingPairCache() override
 	{
 		return m_pairCache;
 	}
-	const btOverlappingPairCache*	getOverlappingPairCache() const
+	const btOverlappingPairCache*	getOverlappingPairCache() const override
 	{
 		return m_pairCache;
 	}
@@ -152,13 +152,13 @@ public:
 
 	///getAabb returns the axis aligned bounding box in the 'global' coordinate frame
 	///will add some transform later
-	virtual void getBroadphaseAabb(btVector3& aabbMin,btVector3& aabbMax) const
+	void getBroadphaseAabb(btVector3& aabbMin,btVector3& aabbMax) const override
 	{
 		aabbMin.setValue(-BT_LARGE_FLOAT,-BT_LARGE_FLOAT,-BT_LARGE_FLOAT);
 		aabbMax.setValue(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
 	}
 
-	virtual void	printStats()
+	void	printStats() override
 	{
 //		printf("btSimpleBroadphase.h\n");
 //		printf("numHandles = %d, maxHandles = %d\n",m_numHandles,m_maxHandles);

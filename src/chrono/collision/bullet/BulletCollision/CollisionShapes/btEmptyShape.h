@@ -33,30 +33,30 @@ class btEmptyShape	: public btConcaveShape
 public:
 	btEmptyShape();
 
-	virtual ~btEmptyShape();
+	~btEmptyShape() override;
 
 
 	///getAabb's default implementation is brute force, expected derived classes to implement a fast dedicated version
-	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 
-	virtual void	setLocalScaling(const btVector3& scaling)
+	void	setLocalScaling(const btVector3& scaling) override
 	{
 		m_localScaling = scaling;
 	}
-	virtual const btVector3& getLocalScaling() const 
+	const btVector3& getLocalScaling() const override 
 	{
 		return m_localScaling;
 	}
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 	
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "Empty";
 	}
 
-	virtual void processAllTriangles(btTriangleCallback* ,const btVector3& ,const btVector3& ) const
+	void processAllTriangles(btTriangleCallback* ,const btVector3& ,const btVector3& ) const override
 	{
 	}
 

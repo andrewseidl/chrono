@@ -2769,14 +2769,14 @@ public:
     reset();
   }
 
-  const NxF64 * getPositionDouble(NxU32 index) const
+  const NxF64 * getPositionDouble(NxU32 index) const override
   {
     assert( mUseDouble );
     assert ( index < mVcount );
     return  &mVerticesDouble[index*3];
   }
 
-  const NxF32 * getPositionFloat(NxU32 index) const
+  const NxF32 * getPositionFloat(NxU32 index) const override
   {
     assert( !mUseDouble );
     assert ( index < mVcount );
@@ -2989,7 +2989,7 @@ public:
     return p;
   }
 
-  NxU32    getIndex(const NxF32 *_p,bool &newPos)  // get index for a vector NxF32
+  NxU32    getIndex(const NxF32 *_p,bool &newPos) override  // get index for a vector NxF32
   {
     NxU32 ret;
 
@@ -3031,7 +3031,7 @@ public:
     return ret;
   }
 
-  NxU32    getIndex(const NxF64 *_p,bool &newPos)  // get index for a vector NxF64
+  NxU32    getIndex(const NxF64 *_p,bool &newPos) override  // get index for a vector NxF64
   {
     NxU32 ret;
 
@@ -3073,7 +3073,7 @@ public:
     return ret;
   }
 
-  const NxF32 *   getVerticesFloat(void) const
+  const NxF32 *   getVerticesFloat(void) const override
   {
     const NxF32 * ret = 0;
 
@@ -3084,7 +3084,7 @@ public:
     return ret;
   }
 
-  const NxF64 *  getVerticesDouble(void) const
+  const NxF64 *  getVerticesDouble(void) const override
   {
     const NxF64 * ret = 0;
 
@@ -3095,7 +3095,7 @@ public:
     return ret;
   }
 
-  const NxF32 *   getVertexFloat(NxU32 index) const
+  const NxF32 *   getVertexFloat(NxU32 index) const override
   {
     const NxF32 * ret  = 0;
     assert( !mUseDouble );
@@ -3108,7 +3108,7 @@ public:
     return ret;
   }
 
-  const NxF64 *   getVertexDouble(NxU32 index) const
+  const NxF64 *   getVertexDouble(NxU32 index) const override
   {
     const NxF64 * ret = 0;
     assert( mUseDouble );
@@ -3122,18 +3122,18 @@ public:
     return ret;
   }
 
-  NxU32    getVcount(void) const
+  NxU32    getVcount(void) const override
   {
     return mKdTree.getVcount();
   }
 
-  bool isDouble(void) const
+  bool isDouble(void) const override
   {
     return mUseDouble;
   }
 
 
-  bool            saveAsObj(const char *fname,NxU32 tcount,NxU32 *indices)
+  bool            saveAsObj(const char *fname,NxU32 tcount,NxU32 *indices) override
   {
     bool ret = false;
 
@@ -4393,7 +4393,7 @@ public:
 
   }
 
-  const NxU32 * tesselate(fm_VertexIndex *vindex,NxU32 tcount,const NxU32 *indices,NxF32 longEdge,NxU32 maxDepth,NxU32 &outcount)
+  const NxU32 * tesselate(fm_VertexIndex *vindex,NxU32 tcount,const NxU32 *indices,NxF32 longEdge,NxU32 maxDepth,NxU32 &outcount) override
   {
     const NxU32 *ret = 0;
 
@@ -5411,12 +5411,12 @@ public:
     mPointsDouble = 0;
   }
 
-  virtual const NxF64 *       triangulate3d(NxU32 pcount,
+  const NxF64 *       triangulate3d(NxU32 pcount,
                                              const NxF64 *_points,
                                              NxU32 vstride,
                                              NxU32 &tcount,
                                              bool consolidate,
-                                             NxF64 epsilon)
+                                             NxF64 epsilon) override
   {
     reset();
 
@@ -5483,12 +5483,12 @@ public:
     return mPointsDouble;
   }
 
-  virtual const NxF32  *       triangulate3d(NxU32 pcount,
+  const NxF32  *       triangulate3d(NxU32 pcount,
                                              const NxF32  *points,
                                              NxU32 vstride,
                                              NxU32 &tcount,
                                              bool consolidate,
-                                             NxF32 epsilon)
+                                             NxF32 epsilon) override
   {
     reset();
 

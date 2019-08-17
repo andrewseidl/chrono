@@ -97,7 +97,7 @@ public:
 		m_supportVecLocal = supportVecWorld * m_worldTrans.getBasis();
 	}
 
-	virtual void processTriangle( btVector3* triangle,int partId, int triangleIndex)
+	void processTriangle( btVector3* triangle,int partId, int triangleIndex) override
 	{
 		(void)partId;
 		(void)triangleIndex;
@@ -160,7 +160,7 @@ void	btTriangleMeshShape::processAllTriangles(btTriangleCallback* callback,const
 		{
 		}
 
-		virtual void internalProcessTriangleIndex(btVector3* triangle,int partId,int triangleIndex)
+		void internalProcessTriangleIndex(btVector3* triangle,int partId,int triangleIndex) override
 		{
 			if (TestTriangleAgainstAabb2(&triangle[0],m_aabbMin,m_aabbMax))
 			{

@@ -187,17 +187,17 @@ public:
 		mHasBeenTested = NULL;
 	}
 
-	virtual ~MyMergeHullsInterface(void)
+	~MyMergeHullsInterface(void) override
 	{
 
 	}
 
 	// Merge these input hulls.
-	virtual hacd::HaU32 mergeHulls(const MergeHullVector &inputHulls,
+	hacd::HaU32 mergeHulls(const MergeHullVector &inputHulls,
 		MergeHullVector &outputHulls,
 		hacd::HaU32 mergeHullCount,
 		hacd::HaF32 smallClusterThreshold,
-		hacd::HaU32 maxHullVertices)
+		hacd::HaU32 maxHullVertices) override
 	{
 		mGuid = 0;
 
@@ -251,7 +251,7 @@ public:
 	}
 
 
-	virtual void release(void) 
+	void release(void) override 
 	{
 		delete this;
 	}

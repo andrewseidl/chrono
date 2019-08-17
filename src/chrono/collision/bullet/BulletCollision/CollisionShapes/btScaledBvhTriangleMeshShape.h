@@ -34,15 +34,15 @@ public:
 
 	btScaledBvhTriangleMeshShape(btBvhTriangleMeshShape* childShape,const btVector3& localScaling);
 
-	virtual ~btScaledBvhTriangleMeshShape();
+	~btScaledBvhTriangleMeshShape() override;
 
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
-	virtual void	setLocalScaling(const btVector3& scaling);
-	virtual const btVector3& getLocalScaling() const;
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
+	void	setLocalScaling(const btVector3& scaling) override;
+	const btVector3& getLocalScaling() const override;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 
 	btBvhTriangleMeshShape*	getChildShape()
 	{
@@ -55,7 +55,7 @@ public:
 	}
 
 	//debugging
-	virtual const char*	getName()const {return "SCALEDBVHTRIANGLEMESH";}
+	const char*	getName()const override {return "SCALEDBVHTRIANGLEMESH";}
 
 };
 

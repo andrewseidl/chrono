@@ -62,19 +62,19 @@ public:
                     double msphereswept_rad =0);
 
 	///CollisionShape Interface
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	/// btConvexShape Interface
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "CEtriangleShape";
 	}
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
     /// access vertex points  of triangle
 	chrono::ChVector<>*	get_p1() const {return p1;}

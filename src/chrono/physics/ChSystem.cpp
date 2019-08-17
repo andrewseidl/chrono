@@ -501,7 +501,7 @@ bool ChSystem::ManageSleepingBodies() {
       public:
         // Callback, used to report contact points already added to the container.
         // If returns false, the contact scanning will be stopped.
-        virtual bool OnReportContact(
+        bool OnReportContact(
             const ChVector<>& pA,             // get contact pA
             const ChVector<>& pB,             // get contact pB
             const ChMatrix33<>& plane_coord,  // get contact plane coordsystem (A column 'X' is contact normal)

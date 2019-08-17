@@ -44,7 +44,7 @@ public:
 		m_transformSubShapes = transformSubShapes;
 	}
 
-	virtual ~GIM_ConvexDecomposition()
+	~GIM_ConvexDecomposition() override
 	{
 		int i;
 		for (i=0;i<m_convexShapes.size();i++)
@@ -55,7 +55,7 @@ public:
 
 	}
 
-	virtual void ConvexDecompResult(ConvexDecomposition::ConvexResult &result)
+	void ConvexDecompResult(ConvexDecomposition::ConvexResult &result) override
 	{
 
 		//calc centroid, to shift vertices around center of mass

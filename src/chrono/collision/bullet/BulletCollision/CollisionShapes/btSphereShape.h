@@ -33,15 +33,15 @@ public:
 		m_collisionMargin = radius;
 	}
 	
-	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertex(const btVector3& vec)const override;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 	//notice that the vectors should be unit length
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 
 	btScalar	getRadius() const { return m_implicitShapeDimensions.getX() * m_localScaling.getX();}
@@ -53,13 +53,13 @@ public:
 	}
 
 	//debugging
-	virtual const char*	getName()const {return "SPHERE";}
+	const char*	getName()const override {return "SPHERE";}
 
-	virtual void	setMargin(btScalar margin)
+	void	setMargin(btScalar margin) override
 	{
 		btConvexInternalShape::setMargin(margin);
 	}
-	virtual btScalar	getMargin() const
+	btScalar	getMargin() const override
 	{
 		//to improve gjk behaviour, use radius+margin as the full margin, so never get into the penetration case
 		//this means, non-uniform scaling is not supported anymore

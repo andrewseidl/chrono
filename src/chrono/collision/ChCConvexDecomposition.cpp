@@ -505,12 +505,12 @@ void ChConvexDecompositionHACDv2::SetParameters(unsigned int mmMaxHullCount,
 
 class MyCallback : public hacd::ICallback {
   public:
-    virtual bool Cancelled() {
+    bool Cancelled() override {
         // Don't have a cancel button in the test console app.
         return false;
     }
 
-    virtual void ReportProgress(const char* message, hacd::HaF32 progress) { std::cout << message; }
+    void ReportProgress(const char* message, hacd::HaF32 progress) override { std::cout << message; }
 };
 
 int ChConvexDecompositionHACDv2::ComputeConvexDecomposition() {

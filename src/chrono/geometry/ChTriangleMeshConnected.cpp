@@ -490,7 +490,7 @@ class GeometryInterface {
 class OBJ : public InPlaceParserInterface {
   public:
     int LoadMesh(const char* fname, GeometryInterface* callback, bool textured);
-    virtual int ParseLine(
+    int ParseLine(
         int lineno,
         int argc,
         const char** argv) override;  // return true to continue parsing, return false to abort parsing process
@@ -724,7 +724,7 @@ class BuildMesh : public GeometryInterface {
         return vcount;
     }
 
-    virtual void NodeTriangle(const GeometryVertex* v1,
+    void NodeTriangle(const GeometryVertex* v1,
                               const GeometryVertex* v2,
                               const GeometryVertex* v3,
                               bool textured) override {

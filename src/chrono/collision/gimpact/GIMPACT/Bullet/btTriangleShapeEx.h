@@ -148,7 +148,7 @@ public:
 	{
 	}
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax)const
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax)const override
 	{
 		btVector3 tv0 = t(m_vertices1[0]);
 		btVector3 tv1 = t(m_vertices1[1]);

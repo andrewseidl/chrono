@@ -250,7 +250,7 @@ btScalar btConvexConcaveCollisionAlgorithm::calculateTimeOfImpact(btCollisionObj
 		}
 		
 		
-		virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex)
+		void processTriangle(btVector3* triangle, int partId, int triangleIndex) override
 		{
 			(void)partId;
 			(void)triangleIndex;

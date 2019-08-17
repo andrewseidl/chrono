@@ -36,7 +36,7 @@ public:
 
 	btOptimizedBvh();
 
-	virtual ~btOptimizedBvh();
+	~btOptimizedBvh() override;
 
 	void	build(btStridingMeshInterface* triangles,bool useQuantizedAabbCompression, const btVector3& bvhAabbMin, const btVector3& bvhAabbMax);
 

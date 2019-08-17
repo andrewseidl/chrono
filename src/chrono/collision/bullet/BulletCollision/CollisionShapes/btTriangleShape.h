@@ -27,7 +27,7 @@ public:
 
 	btVector3	m_vertices1[3];
 
-	virtual int getNumVertices() const
+	int getNumVertices() const override
 	{
 		return 3;
 	}
@@ -41,37 +41,37 @@ public:
 	{
 		return m_vertices1[index];
 	}
-	virtual void getVertex(int index,btVector3& vert) const
+	void getVertex(int index,btVector3& vert) const override
 	{
 		vert = m_vertices1[index];
 	}
 
-	virtual int getNumEdges() const
+	int getNumEdges() const override
 	{
 		return 3;
 	}
 	
-	virtual void getEdge(int i,btVector3& pa,btVector3& pb) const
+	void getEdge(int i,btVector3& pa,btVector3& pb) const override
 	{
 		getVertex(i,pa);
 		getVertex((i+1)%3,pb);
 	}
 
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax)const 
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax)const override 
 	{
 //		btAssert(0);
 		getAabbSlow(t,aabbMin,aabbMax);
 	}
 
-	btVector3 localGetSupportingVertexWithoutMargin(const btVector3& dir)const 
+	btVector3 localGetSupportingVertexWithoutMargin(const btVector3& dir)const override 
 	{
 		btVector3 dots(dir.dot(m_vertices1[0]), dir.dot(m_vertices1[1]), dir.dot(m_vertices1[2]));
 	  	return m_vertices1[dots.maxAxis()];
 
 	}
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override
 	{
 		for (int i=0;i<numVectors;i++)
 		{
@@ -96,12 +96,12 @@ public:
     }
 
 
-	virtual void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i) const
+	void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i) const override
 	{
 		getPlaneEquation(i,planeNormal,planeSupport);
 	}
 
-	virtual int	getNumPlanes() const
+	int	getNumPlanes() const override
 	{
 		return 1;
 	}
@@ -119,14 +119,14 @@ public:
 		planeSupport = m_vertices1[0];
 	}
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override
 	{
 		(void)mass;
 		btAssert(0);
 		inertia.setValue(btScalar(0.),btScalar(0.),btScalar(0.));
 	}
 
-		virtual	bool isInside(const btVector3& pt,btScalar tolerance) const
+			bool isInside(const btVector3& pt,btScalar tolerance) const override
 	{
 		btVector3 normal;
 		calcNormal(normal);
@@ -158,17 +158,17 @@ public:
 		return false;
 	}
 		//debugging
-		virtual const char*	getName()const
+		const char*	getName()const override
 		{
 			return "Triangle";
 		}
 
-		virtual int		getNumPreferredPenetrationDirections() const
+		int		getNumPreferredPenetrationDirections() const override
 		{
 			return 2;
 		}
 		
-		virtual void	getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const
+		void	getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const override
 		{
 			calcNormal(penetrationVector);
 			if (index)

@@ -341,7 +341,7 @@ void	btCollisionWorld::rayTestSingle(const btTransform& rayFromTrans,const btTra
 					}
 
 
-					virtual btScalar reportHit(const btVector3& hitNormalLocal, btScalar hitFraction, int partId, int triangleIndex )
+					btScalar reportHit(const btVector3& hitNormalLocal, btScalar hitFraction, int partId, int triangleIndex ) override
 					{
 						btCollisionWorld::LocalShapeInfo	shapeInfo;
 						shapeInfo.m_shapePart = partId;
@@ -396,7 +396,7 @@ void	btCollisionWorld::rayTestSingle(const btTransform& rayFromTrans,const btTra
 					}
 
 
-					virtual btScalar reportHit(const btVector3& hitNormalLocal, btScalar hitFraction, int partId, int triangleIndex )
+					btScalar reportHit(const btVector3& hitNormalLocal, btScalar hitFraction, int partId, int triangleIndex ) override
 					{
 						btCollisionWorld::LocalShapeInfo	shapeInfo;
 						shapeInfo.m_shapePart = partId;
@@ -442,12 +442,12 @@ void	btCollisionWorld::rayTestSingle(const btTransform& rayFromTrans,const btTra
 					{ 
 						m_closestHitFraction = m_userCallback->m_closestHitFraction;
 					}
-					virtual bool needsCollision(btBroadphaseProxy* p) const
+					bool needsCollision(btBroadphaseProxy* p) const override
 					{
 						return m_userCallback->needsCollision(p);
 					}
 
-					virtual btScalar addSingleResult (btCollisionWorld::LocalRayResult &r, bool b)
+					btScalar addSingleResult (btCollisionWorld::LocalRayResult &r, bool b) override
 					{
 						btCollisionWorld::LocalShapeInfo shapeInfo;
 						shapeInfo.m_shapePart = -1;
@@ -510,7 +510,7 @@ void	btCollisionWorld::rayTestSingle(const btTransform& rayFromTrans,const btTra
 						m_collisionObject->internalSetTemporaryCollisionShape(saveCollisionShape);
 					}
 					
-					void Process(const btDbvtNode* leaf)
+					void Process(const btDbvtNode* leaf) override
 					{
 						Process(leaf->dataAsInt);
 					}
@@ -625,7 +625,7 @@ void	btCollisionWorld::objectQuerySingle(const btConvexShape* castShape,const bt
 					}
 
 
-					virtual btScalar reportHit(const btVector3& hitNormalLocal, const btVector3& hitPointLocal, btScalar hitFraction, int partId, int triangleIndex )
+					btScalar reportHit(const btVector3& hitNormalLocal, const btVector3& hitPointLocal, btScalar hitFraction, int partId, int triangleIndex ) override
 					{
 						btCollisionWorld::LocalShapeInfo	shapeInfo;
 						shapeInfo.m_shapePart = partId;
@@ -682,7 +682,7 @@ void	btCollisionWorld::objectQuerySingle(const btConvexShape* castShape,const bt
 					}
 
 
-					virtual btScalar reportHit(const btVector3& hitNormalLocal, const btVector3& hitPointLocal, btScalar hitFraction, int partId, int triangleIndex )
+					btScalar reportHit(const btVector3& hitNormalLocal, const btVector3& hitPointLocal, btScalar hitFraction, int partId, int triangleIndex ) override
 					{
 						btCollisionWorld::LocalShapeInfo	shapeInfo;
 						shapeInfo.m_shapePart = partId;
@@ -743,7 +743,7 @@ void	btCollisionWorld::objectQuerySingle(const btConvexShape* castShape,const bt
 							{
 								m_closestHitFraction = m_userCallback->m_closestHitFraction;
 							}
-                            virtual btScalar addSingleResult (btCollisionWorld::LocalConvexResult&	r,	bool b)
+                            btScalar addSingleResult (btCollisionWorld::LocalConvexResult&	r,	bool b) override
                             {
                                     btCollisionWorld::LocalShapeInfo	shapeInfo;
                                     shapeInfo.m_shapePart = -1;
@@ -814,7 +814,7 @@ struct btSingleRayCallback : public btBroadphaseRayCallback
 
 
 
-	virtual bool	process(const btBroadphaseProxy* proxy)
+	bool	process(const btBroadphaseProxy* proxy) override
 	{
 		///terminate further ray tests, once the closestHitFraction reached zero
 		if (m_resultCallback.m_closestHitFraction == btScalar(0.f))
@@ -905,7 +905,7 @@ struct btSingleSweepCallback : public btBroadphaseRayCallback
 
 	}
 
-	virtual bool	process(const btBroadphaseProxy* proxy)
+	bool	process(const btBroadphaseProxy* proxy) override
 	{
 		///terminate further convex sweep tests, once the closestHitFraction reached zero
 		if (m_resultCallback.m_closestHitFraction == btScalar(0.f))
@@ -1004,7 +1004,7 @@ struct btBridgedManifoldResult : public btManifoldResult
 	{
 	}
 
-	virtual void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar depth)
+	void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar depth) override
 	{
 		bool isSwapped = m_manifoldPtr->getBody0() != m_body0;
 		btVector3 pointA = pointInWorld + normalOnBInWorld * depth;
@@ -1065,7 +1065,7 @@ struct btSingleContactCallback : public btBroadphaseAabbCallback
 	{
 	}
 
-	virtual bool	process(const btBroadphaseProxy* proxy)
+	bool	process(const btBroadphaseProxy* proxy) override
 	{
 		btCollisionObject*	collisionObject = (btCollisionObject*)proxy->m_clientObject;
 		if (collisionObject == m_collisionObject)
@@ -1137,12 +1137,12 @@ public:
 	  {
 	  }
 
-	  virtual void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex)
+	  void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex) override
 	  {
 		  processTriangle(triangle,partId,triangleIndex);
 	  }
 
-	  virtual void processTriangle(btVector3* triangle,int partId, int triangleIndex)
+	  void processTriangle(btVector3* triangle,int partId, int triangleIndex) override
 	  {
 		  (void)partId;
 		  (void)triangleIndex;

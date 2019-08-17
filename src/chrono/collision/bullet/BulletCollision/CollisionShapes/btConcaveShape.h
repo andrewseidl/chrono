@@ -41,14 +41,14 @@ protected:
 public:
 	btConcaveShape();
 
-	virtual ~btConcaveShape();
+	~btConcaveShape() override;
 
 	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const = 0;
 
-	virtual btScalar getMargin() const {
+	btScalar getMargin() const override {
 		return m_collisionMargin;
 	}
-	virtual void setMargin(btScalar collisionMargin)
+	void setMargin(btScalar collisionMargin) override
 	{
 		m_collisionMargin = collisionMargin;
 	}

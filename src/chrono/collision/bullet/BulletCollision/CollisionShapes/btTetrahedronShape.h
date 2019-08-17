@@ -43,31 +43,31 @@ public:
 		m_numVertices = 0;
 	}
 	
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 	void addVertex(const btVector3& pt);
 
 	//PolyhedralConvexShape interface
 
-	virtual int	getNumVertices() const;
+	int	getNumVertices() const override;
 
-	virtual int getNumEdges() const;
+	int getNumEdges() const override;
 
-	virtual void getEdge(int i,btVector3& pa,btVector3& pb) const;
+	void getEdge(int i,btVector3& pa,btVector3& pb) const override;
 	
-	virtual void getVertex(int i,btVector3& vtx) const;
+	void getVertex(int i,btVector3& vtx) const override;
 
-	virtual int	getNumPlanes() const;
+	int	getNumPlanes() const override;
 
-	virtual void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i) const;
+	void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i) const override;
 
 	virtual int getIndex(int i) const;
 
-	virtual	bool isInside(const btVector3& pt,btScalar tolerance) const;
+		bool isInside(const btVector3& pt,btScalar tolerance) const override;
 
 
 	///getName is for debugging
-	virtual const char*	getName()const { return "btBU_Simplex1to4";}
+	const char*	getName()const override { return "btBU_Simplex1to4";}
 
 };
 

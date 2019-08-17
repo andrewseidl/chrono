@@ -33,15 +33,15 @@ public:
 	btBox2dBox2dCollisionAlgorithm(const btCollisionAlgorithmConstructionInfo& ci)
 		: btActivatingCollisionAlgorithm(ci) {}
 
-	virtual void processCollision (btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut);
+	void processCollision (btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut) override;
 
-	virtual btScalar calculateTimeOfImpact(btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut);
+	btScalar calculateTimeOfImpact(btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut) override;
 
 	btBox2dBox2dCollisionAlgorithm(btPersistentManifold* mf,const btCollisionAlgorithmConstructionInfo& ci,btCollisionObject* body0,btCollisionObject* body1);
 
-	virtual ~btBox2dBox2dCollisionAlgorithm();
+	~btBox2dBox2dCollisionAlgorithm() override;
 
-	virtual	void	getAllContactManifolds(btManifoldArray&	manifoldArray)
+		void	getAllContactManifolds(btManifoldArray&	manifoldArray) override
 	{
 		if (m_manifoldPtr && m_ownManifold)
 		{
@@ -52,7 +52,7 @@ public:
 
 	struct CreateFunc :public 	btCollisionAlgorithmCreateFunc
 	{
-		virtual	btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* body0,btCollisionObject* body1)
+			btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* body0,btCollisionObject* body1) override
 		{
 			int bbsize = sizeof(btBox2dBox2dCollisionAlgorithm);
 			void* ptr = ci.m_dispatcher1->allocateCollisionAlgorithm(bbsize);

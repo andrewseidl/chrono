@@ -41,7 +41,7 @@ public:
 	{
 	}
 
-	virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex)
+	void processTriangle(btVector3* triangle, int partId, int triangleIndex) override
 	{
 		btVector3 newTriangle[3];
 		newTriangle[0] = triangle[0]*m_localScaling;

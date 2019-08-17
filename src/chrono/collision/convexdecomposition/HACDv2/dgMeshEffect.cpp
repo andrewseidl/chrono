@@ -3400,7 +3400,7 @@ class dgClusterList: public dgList<dgClusterFace>
 	  {
 	  }
 
-	  ~dgClusterList()
+	  ~dgClusterList() override
 	  {
 	  }
 

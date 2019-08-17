@@ -807,11 +807,11 @@ public:
 	// use the Wu quantizer with 10 bits of resolution on each axis.  Precision down to 0.0009765625
 	// All input data is normalized to a unit cube.
 
-	virtual const hacd::HaF32 * wuQuantize3D(hacd::HaU32 vcount,
+	const hacd::HaF32 * wuQuantize3D(hacd::HaU32 vcount,
 		const hacd::HaF32 *vertices,
 		bool denormalizeResults,
 		hacd::HaU32 maxVertices,
-		hacd::HaU32 &outputCount)
+		hacd::HaU32 &outputCount) override
 	{
 		const hacd::HaF32 *ret = NULL;
 		outputCount = 0;
@@ -851,11 +851,11 @@ public:
 	}
 
 	// Use the kemans quantizer, similar results, but much slower.
-	virtual const hacd::HaF32 * kmeansQuantize3D(hacd::HaU32 vcount,
+	const hacd::HaF32 * kmeansQuantize3D(hacd::HaU32 vcount,
 		const hacd::HaF32 *vertices,
 		bool denormalizeResults,
 		hacd::HaU32 maxVertices,
-		hacd::HaU32 &outputCount)
+		hacd::HaU32 &outputCount) override
 	{
 		const hacd::HaF32 *ret = NULL;
 		outputCount = 0;
@@ -898,17 +898,17 @@ public:
 		return ret;
 	}
 
-	virtual void release(void)
+	void release(void) override
 	{
 		delete this;
 	}
 
-	virtual const hacd::HaF32 * getDenormalizeScale(void) const 
+	const hacd::HaF32 * getDenormalizeScale(void) const override 
 	{
 		return &mScale.x;
 	}
 
-	virtual const hacd::HaF32 * getDenormalizeCenter(void) const
+	const hacd::HaF32 * getDenormalizeCenter(void) const override
 	{
 		return &mCenter.x;
 	}
@@ -1011,7 +1011,7 @@ private:
 		}
 	}
 
-	virtual ~MyWuQuantizer(void)
+	~MyWuQuantizer(void) override
 	{
 
 	}

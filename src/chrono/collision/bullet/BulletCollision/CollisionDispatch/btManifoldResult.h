@@ -65,7 +65,7 @@ public:
 
 	btManifoldResult(btCollisionObject* body0,btCollisionObject* body1);
 
-	virtual ~btManifoldResult() {};
+	~btManifoldResult() override {};
 
 	void	setPersistentManifold(btPersistentManifold* manifoldPtr)
 	{
@@ -81,20 +81,20 @@ public:
 		return m_manifoldPtr;
 	}
 
-	virtual void setShapeIdentifiersA(int partId0,int index0)
+	void setShapeIdentifiersA(int partId0,int index0) override
 	{
 		m_partId0=partId0;
 		m_index0=index0;
 	}
 
-	virtual void setShapeIdentifiersB(	int partId1,int index1)
+	void setShapeIdentifiersB(	int partId1,int index1) override
 	{
 		m_partId1=partId1;
 		m_index1=index1;
 	}
 
 
-	virtual void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar depth);
+	void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar depth) override;
 
 	SIMD_FORCE_INLINE	void refreshContactPoints()
 	{

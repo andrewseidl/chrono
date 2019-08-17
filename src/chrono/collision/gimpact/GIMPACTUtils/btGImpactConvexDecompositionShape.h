@@ -70,14 +70,14 @@ public:
 		buildConvexDecomposition(children_has_transform);
 	}
 
-	virtual ~btGImpactConvexDecompositionShape();
+	~btGImpactConvexDecompositionShape() override;
 
 	SIMD_FORCE_INLINE btGImpactMeshShapePart::TrimeshPrimitiveManager * getTrimeshInterface(int part)
 	{
 		return &m_trimeshInterfaces[part];
 	}
 
-	virtual void processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 
 };
 

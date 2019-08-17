@@ -103,7 +103,7 @@ void	btBvhTriangleMeshShape::performRaycast (btTriangleCallback* callback, const
 		{
 		}
 				
-		virtual void processNode(int nodeSubPart, int nodeTriangleIndex)
+		void processNode(int nodeSubPart, int nodeTriangleIndex) override
 		{
 			btVector3 m_triangle[3];
 			const unsigned char *vertexbase;
@@ -172,7 +172,7 @@ void	btBvhTriangleMeshShape::performConvexcast (btTriangleCallback* callback, co
 		{
 		}
 				
-		virtual void processNode(int nodeSubPart, int nodeTriangleIndex)
+		void processNode(int nodeSubPart, int nodeTriangleIndex) override
 		{
 			btVector3 m_triangle[3];
 			const unsigned char *vertexbase;
@@ -253,7 +253,7 @@ void	btBvhTriangleMeshShape::processAllTriangles(btTriangleCallback* callback,co
 		{
 		}
 				
-		virtual void processNode(int nodeSubPart, int nodeTriangleIndex)
+		void processNode(int nodeSubPart, int nodeTriangleIndex) override
 		{
 			const unsigned char *vertexbase;
 			int numverts;

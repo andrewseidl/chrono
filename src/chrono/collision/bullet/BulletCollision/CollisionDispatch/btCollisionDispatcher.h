@@ -81,17 +81,17 @@ public:
 	///registerCollisionCreateFunc allows registration of custom/alternative collision create functions
 	void	registerCollisionCreateFunc(int proxyType0,int proxyType1, btCollisionAlgorithmCreateFunc* createFunc);
 
-	int	getNumManifolds() const
+	int	getNumManifolds() const override
 	{ 
 		return int( m_manifoldsPtr.size());
 	}
 
-	btPersistentManifold**	getInternalManifoldPointer()
+	btPersistentManifold**	getInternalManifoldPointer() override
 	{
 		return &m_manifoldsPtr[0];
 	}
 
-	 btPersistentManifold* getManifoldByIndexInternal(int index)
+	 btPersistentManifold* getManifoldByIndexInternal(int index) override
 	{
 		return m_manifoldsPtr[index];
 	}
@@ -103,23 +103,23 @@ public:
 
 	btCollisionDispatcher (btCollisionConfiguration* collisionConfiguration);
 
-	virtual ~btCollisionDispatcher();
+	~btCollisionDispatcher() override;
 
-	virtual btPersistentManifold*	getNewManifold(void* b0,void* b1);
+	btPersistentManifold*	getNewManifold(void* b0,void* b1) override;
 	
-	virtual void releaseManifold(btPersistentManifold* manifold);
+	void releaseManifold(btPersistentManifold* manifold) override;
 
 
-	virtual void clearManifold(btPersistentManifold* manifold);
+	void clearManifold(btPersistentManifold* manifold) override;
 
 			
-	btCollisionAlgorithm* findAlgorithm(btCollisionObject* body0,btCollisionObject* body1,btPersistentManifold* sharedManifold = 0);
+	btCollisionAlgorithm* findAlgorithm(btCollisionObject* body0,btCollisionObject* body1,btPersistentManifold* sharedManifold = 0) override;
 		
-	virtual bool	needsCollision(btCollisionObject* body0,btCollisionObject* body1);
+	bool	needsCollision(btCollisionObject* body0,btCollisionObject* body1) override;
 	
-	virtual bool	needsResponse(btCollisionObject* body0,btCollisionObject* body1);
+	bool	needsResponse(btCollisionObject* body0,btCollisionObject* body1) override;
 	
-	virtual void	dispatchAllCollisionPairs(btOverlappingPairCache* pairCache,const btDispatcherInfo& dispatchInfo,btDispatcher* dispatcher) ;
+	void	dispatchAllCollisionPairs(btOverlappingPairCache* pairCache,const btDispatcherInfo& dispatchInfo,btDispatcher* dispatcher) override ;
 
 	void	setNearCallback(btNearCallback	nearCallback)
 	{
@@ -134,9 +134,9 @@ public:
 	//by default, Bullet will use this near callback
 	static void  defaultNearCallback(btBroadphasePair& collisionPair, btCollisionDispatcher& dispatcher, const btDispatcherInfo& dispatchInfo);
 
-	virtual	void* allocateCollisionAlgorithm(int size);
+		void* allocateCollisionAlgorithm(int size) override;
 
-	virtual	void freeCollisionAlgorithm(void* ptr);
+		void freeCollisionAlgorithm(void* ptr) override;
 
 	btCollisionConfiguration*	getCollisionConfiguration()
 	{

@@ -82,7 +82,7 @@ void	btHashedOverlappingPairCache::cleanProxyFromPairs(btBroadphaseProxy* proxy,
 			m_dispatcher(dispatcher)
 		{
 		}
-		virtual	bool	processOverlap(btBroadphasePair& pair)
+			bool	processOverlap(btBroadphasePair& pair) override
 		{
 			if ((pair.m_pProxy0 == m_cleanProxy) ||
 				(pair.m_pProxy1 == m_cleanProxy))
@@ -115,7 +115,7 @@ void	btHashedOverlappingPairCache::removeOverlappingPairsContainingProxy(btBroad
 			:m_obsoleteProxy(obsoleteProxy)
 		{
 		}
-		virtual	bool	processOverlap(btBroadphasePair& pair)
+			bool	processOverlap(btBroadphasePair& pair) override
 		{
 			return ((pair.m_pProxy0 == m_obsoleteProxy) ||
 				(pair.m_pProxy1 == m_obsoleteProxy));
@@ -582,7 +582,7 @@ void	btSortedOverlappingPairCache::cleanProxyFromPairs(btBroadphaseProxy* proxy,
 			m_dispatcher(dispatcher)
 		{
 		}
-		virtual	bool	processOverlap(btBroadphasePair& pair)
+			bool	processOverlap(btBroadphasePair& pair) override
 		{
 			if ((pair.m_pProxy0 == m_cleanProxy) ||
 				(pair.m_pProxy1 == m_cleanProxy))
@@ -613,7 +613,7 @@ void	btSortedOverlappingPairCache::removeOverlappingPairsContainingProxy(btBroad
 			:m_obsoleteProxy(obsoleteProxy)
 		{
 		}
-		virtual	bool	processOverlap(btBroadphasePair& pair)
+			bool	processOverlap(btBroadphasePair& pair) override
 		{
 			return ((pair.m_pProxy0 == m_obsoleteProxy) ||
 				(pair.m_pProxy1 == m_obsoleteProxy));

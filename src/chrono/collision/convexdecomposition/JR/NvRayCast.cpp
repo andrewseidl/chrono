@@ -69,11 +69,11 @@ public:
 		mIndices  = indices;
 	}
 
-	~RayCast(void)
+	~RayCast(void) override
 	{
 	}
 
-	virtual bool castRay(const NxF32 *orig,const NxF32 *dir,NxF32 *dest,NxF32 *hitNormal)
+	bool castRay(const NxF32 *orig,const NxF32 *dir,NxF32 *dest,NxF32 *hitNormal) override
 	{
 		bool ret = false;
 

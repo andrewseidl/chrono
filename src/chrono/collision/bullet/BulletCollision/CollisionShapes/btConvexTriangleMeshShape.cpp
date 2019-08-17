@@ -49,7 +49,7 @@ public:
 	{
 	}
 
-	virtual void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex)
+	void internalProcessTriangleIndex(btVector3* triangle,int partId,int  triangleIndex) override
 	{
 		(void)triangleIndex;
 		(void)partId;
@@ -222,7 +222,7 @@ void btConvexTriangleMeshShape::calculatePrincipalAxisTransform(btTransform& pri
       {
       }
 
-      virtual void internalProcessTriangleIndex(btVector3* triangle, int partId, int triangleIndex)
+      void internalProcessTriangleIndex(btVector3* triangle, int partId, int triangleIndex) override
       {
          (void) triangleIndex;
          (void) partId;
@@ -262,7 +262,7 @@ void btConvexTriangleMeshShape::calculatePrincipalAxisTransform(btTransform& pri
       {
       }
 
-      virtual void internalProcessTriangleIndex(btVector3* triangle, int partId, int triangleIndex)
+      void internalProcessTriangleIndex(btVector3* triangle, int partId, int triangleIndex) override
       {
          (void) triangleIndex;
          (void) partId;

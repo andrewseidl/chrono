@@ -47,12 +47,12 @@ public:
 	{
 		
 	}
-	virtual ~MyHACD_API(void)
+	~MyHACD_API(void) override
 	{
 		releaseHACD();
 	}
 
-	virtual hacd::HaU32	performHACD(const Desc &desc) 
+	hacd::HaU32	performHACD(const Desc &desc) override 
 	{
 		hacd::HaU32 ret = 0;
 		releaseHACD();
@@ -211,7 +211,7 @@ public:
 		h.mVertices = NULL;
 	}
 
-	virtual const Hull		*getHull(hacd::HaU32 index)  const
+	const Hull		*getHull(hacd::HaU32 index)  const override
 	{
 		const Hull *ret = NULL;
 		if ( index < mHulls.size() )
@@ -221,7 +221,7 @@ public:
 		return ret;
 	}
 
-	virtual void	releaseHACD(void) // release memory associated with the last HACD request
+	void	releaseHACD(void) override // release memory associated with the last HACD request
 	{
 		for (hacd::HaU32 i=0; i<mHulls.size(); i++)
 		{
@@ -231,12 +231,12 @@ public:
 	}
 
 
-	virtual void release(void) // release the HACD_API interface
+	void release(void) override // release the HACD_API interface
 	{
 		delete this;
 	}
 
-	virtual hacd::HaU32	getHullCount(void)
+	hacd::HaU32	getHullCount(void) override
 	{
 		return (hacd::HaU32) mHulls.size(); 
 	}

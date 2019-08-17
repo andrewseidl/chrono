@@ -57,19 +57,19 @@ namespace bParse {
 
 		btBulletFile(char *memoryBuffer, int len);
 
-		virtual ~btBulletFile();
+		~btBulletFile() override;
 
-		virtual	void	addDataBlock(char* dataBlock);
+			void	addDataBlock(char* dataBlock) override;
 	
 
 		// experimental
-		virtual int		write(const char* fileName, bool fixupPointers=false);
+		int		write(const char* fileName, bool fixupPointers=false) override;
 
-		virtual	void	parse(bool verboseDumpAllTypes);
+			void	parse(bool verboseDumpAllTypes) override;
 
-		virtual	void parseData();
+			void parseData() override;
 
-		virtual	void	writeDNA(FILE* fp);
+			void	writeDNA(FILE* fp) override;
 
 		void	addStruct(const char* structType,void* data, int len, void* oldPtr, int code);
 

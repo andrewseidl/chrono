@@ -94,20 +94,20 @@ public:
 
 	btDefaultCollisionConfiguration(const btDefaultCollisionConstructionInfo& constructionInfo = btDefaultCollisionConstructionInfo());
 
-	virtual ~btDefaultCollisionConfiguration();
+	~btDefaultCollisionConfiguration() override;
 
 		///memory pools
-	virtual btPoolAllocator* getPersistentManifoldPool()
+	btPoolAllocator* getPersistentManifoldPool() override
 	{
 		return m_persistentManifoldPool;
 	}
 
-	virtual btPoolAllocator* getCollisionAlgorithmPool()
+	btPoolAllocator* getCollisionAlgorithmPool() override
 	{
 		return m_collisionAlgorithmPool;
 	}
 
-	virtual btStackAlloc*	getStackAllocator()
+	btStackAlloc*	getStackAllocator() override
 	{
 		return m_stackAlloc;
 	}
@@ -118,7 +118,7 @@ public:
 	}
 
 
-	virtual btCollisionAlgorithmCreateFunc* getCollisionAlgorithmCreateFunc(int proxyType0,int proxyType1);
+	btCollisionAlgorithmCreateFunc* getCollisionAlgorithmCreateFunc(int proxyType0,int proxyType1) override;
 
 	///Use this method to allow to generate multiple contact points between at once, between two objects using the generic convex-convex algorithm.
 	///By default, this feature is disabled for best performance.

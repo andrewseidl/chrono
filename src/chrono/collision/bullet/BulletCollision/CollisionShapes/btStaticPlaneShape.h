@@ -33,17 +33,17 @@ protected:
 public:
 	btStaticPlaneShape(const btVector3& planeNormal,btScalar planeConstant);
 
-	virtual ~btStaticPlaneShape();
+	~btStaticPlaneShape() override;
 
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual void	setLocalScaling(const btVector3& scaling);
-	virtual const btVector3& getLocalScaling() const;
+	void	setLocalScaling(const btVector3& scaling) override;
+	const btVector3& getLocalScaling() const override;
 	
 	const btVector3&	getPlaneNormal() const
 	{
@@ -56,12 +56,12 @@ public:
 	}
 
 	//debugging
-	virtual const char*	getName()const {return "STATICPLANE";}
+	const char*	getName()const override {return "STATICPLANE";}
 
-	virtual	int	calculateSerializeBufferSize() const;
+		int	calculateSerializeBufferSize() const override;
 
 	///fills the dataBuffer and returns the struct name (and 0 on failure)
-	virtual	const char*	serialize(void* dataBuffer, btSerializer* serializer) const;
+		const char*	serialize(void* dataBuffer, btSerializer* serializer) const override;
 
 
 };

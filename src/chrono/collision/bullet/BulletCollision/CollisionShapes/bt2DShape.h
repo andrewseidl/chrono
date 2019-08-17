@@ -49,19 +49,19 @@ public:
                     btScalar mzthickness= 0.001);
 
 	///CollisionShape Interface
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	/// btConvexShape Interface
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "ArcShape";
 	}
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 	btScalar	get_X() const {return x;}
 	btScalar	get_Y() const {return y;}
@@ -93,19 +93,19 @@ public:
                         const btScalar mzthickness = 0.001);
 
 	///CollisionShape Interface
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	/// btConvexShape Interface
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "SegmentShape";
 	}
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 	btVector3	get_P1() const {return P1;}
 	btVector3	get_P2() const {return P2;}
@@ -127,7 +127,7 @@ public:
         : btSphereShape(mrad) 
     { m_shapeType = POINT_SHAPE_PROXYTYPE; };
 
-    virtual const char*	getName()const 
+    const char*	getName()const override 
 	{
 		return "PointShape";
 	}

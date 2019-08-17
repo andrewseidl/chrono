@@ -45,7 +45,7 @@ public:
 	///optionally pass in a larger bvh aabb, used for quantization. This allows for deformations within this aabb
 	btBvhTriangleMeshShape(btStridingMeshInterface* meshInterface, bool useQuantizedAabbCompression,const btVector3& bvhAabbMin,const btVector3& bvhAabbMax, bool buildBvh = true);
 	
-	virtual ~btBvhTriangleMeshShape();
+	~btBvhTriangleMeshShape() override;
 
 	bool getOwnsBvh () const
 	{
@@ -57,7 +57,7 @@ public:
 	void performRaycast (btTriangleCallback* callback, const btVector3& raySource, const btVector3& rayTarget);
 	void performConvexcast (btTriangleCallback* callback, const btVector3& boxSource, const btVector3& boxTarget, const btVector3& boxMin, const btVector3& boxMax);
 
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 
 	void	refitTree(const btVector3& aabbMin,const btVector3& aabbMax);
 
@@ -65,10 +65,10 @@ public:
 	void	partialRefitTree(const btVector3& aabbMin,const btVector3& aabbMax);
 
 	//debugging
-	virtual const char*	getName()const {return "BVHTRIANGLEMESH";}
+	const char*	getName()const override {return "BVHTRIANGLEMESH";}
 
 
-	virtual void	setLocalScaling(const btVector3& scaling);
+	void	setLocalScaling(const btVector3& scaling) override;
 	
 	btOptimizedBvh*	getOptimizedBvh()
 	{
@@ -99,10 +99,10 @@ public:
 		return m_triangleInfoMap;
 	}
 
-	virtual	int	calculateSerializeBufferSize() const;
+		int	calculateSerializeBufferSize() const override;
 
 	///fills the dataBuffer and returns the struct name (and 0 on failure)
-	virtual	const char*	serialize(void* dataBuffer, btSerializer* serializer) const;
+		const char*	serialize(void* dataBuffer, btSerializer* serializer) const override;
 
 	virtual void	serializeSingleBvh(btSerializer* serializer) const;
 

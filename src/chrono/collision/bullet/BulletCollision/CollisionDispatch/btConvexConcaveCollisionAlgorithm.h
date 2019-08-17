@@ -49,9 +49,9 @@ int	m_triangleCount;
 
 	void	setTimeStepAndCounters(btScalar collisionMarginTriangle,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut);
 
-	virtual ~btConvexTriangleCallback();
+	~btConvexTriangleCallback() override;
 
-	virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex);
+	void processTriangle(btVector3* triangle, int partId, int triangleIndex) override;
 	
 	void clearCache();
 
@@ -83,19 +83,19 @@ public:
 
 	btConvexConcaveCollisionAlgorithm( const btCollisionAlgorithmConstructionInfo& ci,btCollisionObject* body0,btCollisionObject* body1,bool isSwapped);
 
-	virtual ~btConvexConcaveCollisionAlgorithm();
+	~btConvexConcaveCollisionAlgorithm() override;
 
-	virtual void processCollision (btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut);
+	void processCollision (btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut) override;
 
-	btScalar	calculateTimeOfImpact(btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut);
+	btScalar	calculateTimeOfImpact(btCollisionObject* body0,btCollisionObject* body1,const btDispatcherInfo& dispatchInfo,btManifoldResult* resultOut) override;
 
-	virtual	void	getAllContactManifolds(btManifoldArray&	manifoldArray);
+		void	getAllContactManifolds(btManifoldArray&	manifoldArray) override;
 	
 	void	clearCache();
 
 	struct CreateFunc :public 	btCollisionAlgorithmCreateFunc
 	{
-		virtual	btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* body0,btCollisionObject* body1)
+			btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* body0,btCollisionObject* body1) override
 		{
 			void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btConvexConcaveCollisionAlgorithm));
 			return new(mem) btConvexConcaveCollisionAlgorithm(ci,body0,body1,false);
@@ -104,7 +104,7 @@ public:
 
 	struct SwappedCreateFunc :public 	btCollisionAlgorithmCreateFunc
 	{
-		virtual	btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* body0,btCollisionObject* body1)
+			btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* body0,btCollisionObject* body1) override
 		{
 			void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btConvexConcaveCollisionAlgorithm));
 			return new(mem) btConvexConcaveCollisionAlgorithm(ci,body0,body1,true);

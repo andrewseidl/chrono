@@ -147,7 +147,7 @@ class Brick_ForceAnalytical : public ChIntegrable3D<ChVectorN<double, 906>> {
                           ChVectorN<double, 9>* alpha_eas_,
                           double* E_,
                           double* v_);
-    ~Brick_ForceAnalytical() {}
+    ~Brick_ForceAnalytical() override {}
 
   private:
     ChElementBrick* element;
@@ -180,7 +180,7 @@ class Brick_ForceAnalytical : public ChIntegrable3D<ChVectorN<double, 906>> {
     ChVectorN<double, 6> strain_EAS;  // Enhanced assumed strain vector
 
     // Evaluate (strainD'*strain)  at a point
-    virtual void Evaluate(ChVectorN<double, 906>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 906>& result, const double x, const double y, const double z) override;
 };
 
 Brick_ForceAnalytical::Brick_ForceAnalytical(ChMatrixNM<double, 8, 3>* d_,
@@ -696,7 +696,7 @@ class Brick_ForceNumerical : public ChIntegrable3D<ChVectorN<double, 330>> {
                          ChVectorN<double, 9>* alpha_eas_,
                          double* E_,
                          double* v_);
-    ~Brick_ForceNumerical() {}
+    ~Brick_ForceNumerical() override {}
 
   private:
     ChElementBrick* element;
@@ -725,7 +725,7 @@ class Brick_ForceNumerical : public ChIntegrable3D<ChVectorN<double, 330>> {
     ChVectorN<double, 6> strain_EAS;  // Enhanced assumed strain vector
 
     // Gaussian integration to calculate internal forces and EAS matrices
-    virtual void Evaluate(ChVectorN<double, 330>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 330>& result, const double x, const double y, const double z) override;
 };
 
 Brick_ForceNumerical::Brick_ForceNumerical(ChMatrixNM<double, 8, 3>* d_,
@@ -1508,7 +1508,7 @@ void ChElementBrick::ComputeStiffnessMatrix() {
 class Brick_Mass : public ChIntegrable3D<ChMatrixNM<double, 24, 24>> {
   public:
     Brick_Mass(ChMatrixNM<double, 8, 3>* d0_, ChElementBrick* element_);
-    ~Brick_Mass() {}
+    ~Brick_Mass() override {}
 
   private:
     ChElementBrick* element;
@@ -1520,7 +1520,7 @@ class Brick_Mass : public ChIntegrable3D<ChMatrixNM<double, 24, 24>> {
     ChElementBrick::ShapeVector Nz;  ///< Dense shape function vector, Z derivative
 
     /// Evaluate the S'*S  at point x
-    virtual void Evaluate(ChMatrixNM<double, 24, 24>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 24, 24>& result, const double x, const double y, const double z) override;
 };
 
 Brick_Mass::Brick_Mass(ChMatrixNM<double, 8, 3>* d0_, ChElementBrick* element_) : d0(d0_), element(element_) {
@@ -1575,7 +1575,7 @@ void ChElementBrick::ComputeMassMatrix() {
 class BrickGravity : public ChIntegrable3D<ChVectorN<double, 24>> {
   public:
     BrickGravity(ChMatrixNM<double, 8, 3>* d0_, ChElementBrick* element_, const ChVector<> g_acc);
-    ~BrickGravity() {}
+    ~BrickGravity() override {}
 
   private:
     ChElementBrick* element;
@@ -1587,7 +1587,7 @@ class BrickGravity : public ChIntegrable3D<ChVectorN<double, 24>> {
     ChElementBrick::ShapeVector Nz;  // Dense shape function vector, Z derivative
     ChVector<> gacc;                 // gravitational acceleration
 
-    virtual void Evaluate(ChVectorN<double, 24>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 24>& result, const double x, const double y, const double z) override;
 };
 
 BrickGravity::BrickGravity(ChMatrixNM<double, 8, 3>* d0_, ChElementBrick* element_, const ChVector<> g_acc)

@@ -92,7 +92,7 @@ class dgTree
 //			HACD_ASSERT ((hacd::HaU64 (&m_info) & 0x0f) == 0);
 		}
 
-		~dgTreeNode () 
+		~dgTreeNode () override 
 		{
 		}
 

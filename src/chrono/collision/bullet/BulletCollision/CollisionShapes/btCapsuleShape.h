@@ -36,14 +36,14 @@ public:
 	btCapsuleShape(btScalar radius,btScalar height);
 
 	///CollisionShape Interface
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	/// btConvexShape Interface
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 	
-	virtual void setMargin(btScalar collisionMargin)
+	void setMargin(btScalar collisionMargin) override
 	{
 		//correct the m_implicitShapeDimensions for the margin
 		btVector3 oldMargin(getMargin(),getMargin(),getMargin());
@@ -55,7 +55,7 @@ public:
 
 	}
 
-	virtual void getAabb (const btTransform& t, btVector3& aabbMin, btVector3& aabbMax) const
+	void getAabb (const btTransform& t, btVector3& aabbMin, btVector3& aabbMax) const override
 	{
 			btVector3 halfExtents(getRadius(),getRadius(),getRadius());
 			halfExtents[m_upAxis] = getRadius() + getHalfHeight();
@@ -68,7 +68,7 @@ public:
 			aabbMax = center + extent;
 	}
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "CapsuleShape";
 	}
@@ -89,7 +89,7 @@ public:
 		return m_implicitShapeDimensions[m_upAxis];
 	}
 
-	virtual void	setLocalScaling(const btVector3& scaling)
+	void	setLocalScaling(const btVector3& scaling) override
 	{
 		btVector3 oldMargin(getMargin(),getMargin(),getMargin());
 		btVector3 implicitShapeDimensionsWithMargin = m_implicitShapeDimensions+oldMargin;
@@ -101,10 +101,10 @@ public:
 
 	}
 
-	virtual	int	calculateSerializeBufferSize() const;
+		int	calculateSerializeBufferSize() const override;
 
 	///fills the dataBuffer and returns the struct name (and 0 on failure)
-	virtual	const char*	serialize(void* dataBuffer, btSerializer* serializer) const;
+		const char*	serialize(void* dataBuffer, btSerializer* serializer) const override;
 
 
 };
@@ -118,7 +118,7 @@ public:
 	btCapsuleShapeX(btScalar radius,btScalar height);
 		
 	//debugging
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "CapsuleX";
 	}
@@ -135,7 +135,7 @@ public:
 	btCapsuleShapeZ(btScalar radius,btScalar height);
 
 		//debugging
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "CapsuleZ";
 	}

@@ -153,7 +153,7 @@ class myEmployeeBoss : public myEmployee {
 
     // MEMBER FUNCTIONS FOR BINARY I/O
 
-    virtual void ArchiveOUT(ChArchiveOut& marchive)  //##### for Chrono serialization
+    void ArchiveOUT(ChArchiveOut& marchive) override  //##### for Chrono serialization
     {
         // suggested: use versioning
         marchive.VersionWrite<myEmployeeBoss>();
@@ -164,7 +164,7 @@ class myEmployeeBoss : public myEmployee {
         marchive << CHNVP(is_dumb);
         marchive << CHNVP(slave);  // this added only from version >1
     }
-    virtual void ArchiveIN(ChArchiveIn& marchive)  //##### for Chrono serialization
+    void ArchiveIN(ChArchiveIn& marchive) override  //##### for Chrono serialization
     {
         // suggested: use versioning
         int version = marchive.VersionRead<myEmployeeBoss>();
@@ -206,7 +206,7 @@ class myEmployeeCustomConstructor : public myEmployee {
 
     // MEMBER FUNCTIONS FOR BINARY I/O
 
-    virtual void ArchiveOUT(ChArchiveOut& marchive)  //##### for Chrono serialization
+    void ArchiveOUT(ChArchiveOut& marchive) override  //##### for Chrono serialization
     {
         // suggested: use versioning
         marchive.VersionWrite<myEmployeeCustomConstructor>();
@@ -215,7 +215,7 @@ class myEmployeeCustomConstructor : public myEmployee {
         // stream out member data (except data used in constructor, already saved in ArchiveOUTconstructor)
         marchive << CHNVP(legs);
     }
-    virtual void ArchiveIN(ChArchiveIn& marchive)  //##### for Chrono serialization
+    void ArchiveIN(ChArchiveIn& marchive) override  //##### for Chrono serialization
     {
         // suggested: use versioning
         int version = marchive.VersionRead<myEmployeeCustomConstructor>();

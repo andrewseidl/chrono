@@ -79,25 +79,25 @@ public:
 	}
 
 #ifndef __SPU__
-	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	btVector3	localGetSupportingVertex(const btVector3& vec)const override;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 #endif
 
 
 	//debugging
-	virtual const char*	getName()const {return "ConvexPointCloud";}
+	const char*	getName()const override {return "ConvexPointCloud";}
 
-	virtual int	getNumVertices() const;
-	virtual int getNumEdges() const;
-	virtual void getEdge(int i,btVector3& pa,btVector3& pb) const;
-	virtual void getVertex(int i,btVector3& vtx) const;
-	virtual int	getNumPlanes() const;
-	virtual void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i ) const;
-	virtual	bool isInside(const btVector3& pt,btScalar tolerance) const;
+	int	getNumVertices() const override;
+	int getNumEdges() const override;
+	void getEdge(int i,btVector3& pa,btVector3& pb) const override;
+	void getVertex(int i,btVector3& vtx) const override;
+	int	getNumPlanes() const override;
+	void getPlane(btVector3& planeNormal,btVector3& planeSupport,int i ) const override;
+		bool isInside(const btVector3& pt,btScalar tolerance) const override;
 
 	///in case we receive negative scaling
-	virtual void	setLocalScaling(const btVector3& scaling);
+	void	setLocalScaling(const btVector3& scaling) override;
 };
 
 

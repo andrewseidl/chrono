@@ -434,7 +434,7 @@ class btBvhTriangleMeshShape_handlemesh : public btBvhTriangleMeshShape {
     btBvhTriangleMeshShape_handlemesh(btStridingMeshInterface* meshInterface)
         : btBvhTriangleMeshShape(meshInterface, true), minterface(meshInterface){};
 
-    ~btBvhTriangleMeshShape_handlemesh() {
+    ~btBvhTriangleMeshShape_handlemesh() override {
         if (minterface)
             delete minterface;
         minterface = 0;  // also delete the mesh interface
@@ -448,7 +448,7 @@ class btConvexTriangleMeshShape_handlemesh : public btConvexTriangleMeshShape {
     btConvexTriangleMeshShape_handlemesh(btStridingMeshInterface* meshInterface)
         : btConvexTriangleMeshShape(meshInterface), minterface(meshInterface){};
 
-    ~btConvexTriangleMeshShape_handlemesh() {
+    ~btConvexTriangleMeshShape_handlemesh() override {
         if (minterface)
             delete minterface;
         minterface = 0;  // also delete the mesh interface
@@ -464,7 +464,7 @@ class btGImpactConvexDecompositionShape_handlemesh : public btGImpactConvexDecom
           minterface(meshInterface){// this->setLocalScaling(btVector3(1.f,1.f,1.f));
           };
 
-    virtual ~btGImpactConvexDecompositionShape_handlemesh() {
+    ~btGImpactConvexDecompositionShape_handlemesh() override {
         if (minterface)
             delete minterface;
         minterface = 0;  // also delete the mesh interface
@@ -480,7 +480,7 @@ class btGImpactMeshShape_handlemesh : public btGImpactMeshShape {
           minterface(meshInterface){// this->setLocalScaling(btVector3(1.f,1.f,1.f));
           };
 
-    virtual ~btGImpactMeshShape_handlemesh() {
+    ~btGImpactMeshShape_handlemesh() override {
         if (minterface)
             delete minterface;
         minterface = 0;  // also delete the mesh interface

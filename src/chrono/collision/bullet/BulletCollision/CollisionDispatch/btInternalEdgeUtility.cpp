@@ -57,7 +57,7 @@ struct btConnectivityProcessor : public btTriangleCallback
 	btTriangleInfoMap*	m_triangleInfoMap;
 
 
-	virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex)
+	void processTriangle(btVector3* triangle, int partId, int triangleIndex) override
 	{
 		//skip self-collisions
 		if ((m_partIdA == partId) && (m_triangleIndexA == triangleIndex))

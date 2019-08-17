@@ -109,19 +109,19 @@ public:
 	{
 	public:
 
-		virtual btCollisionShape * getChildShape(int index)
+		btCollisionShape * getChildShape(int index) override
 		{
 			m_parent->m_gim_shape->getBulletTriangle(index,m_parent->m_trishape);
 			return &m_parent->m_trishape;
 		}
-		virtual ~TriangleShapeRetriever() {}
+		~TriangleShapeRetriever() override {}
 	};
 
 	class TetraShapeRetriever:public ChildShapeRetriever
 	{
 	public:
 
-		virtual btCollisionShape * getChildShape(int index)
+		btCollisionShape * getChildShape(int index) override
 		{
 			m_parent->m_gim_shape->getBulletTetrahedron(index,m_parent->m_tetrashape);
 			return &m_parent->m_tetrashape;
@@ -788,7 +788,7 @@ public:
 	bool swapped;
 	btScalar margin;
 
-	virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex)
+	void processTriangle(btVector3* triangle, int partId, int triangleIndex) override
 	{
 		btTriangleShapeEx tri1(triangle[0],triangle[1],triangle[2]);
 		tri1.setMargin(margin);

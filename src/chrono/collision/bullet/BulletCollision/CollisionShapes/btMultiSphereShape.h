@@ -35,12 +35,12 @@ public:
 	btMultiSphereShape (const btVector3* positions,const btScalar* radi,int numSpheres);
 
 	///CollisionShape Interface
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	/// btConvexShape Interface
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 	
 	int	getSphereCount() const
 	{
@@ -58,15 +58,15 @@ public:
 	}
 
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "MultiSphere";
 	}
 
-	virtual	int	calculateSerializeBufferSize() const;
+		int	calculateSerializeBufferSize() const override;
 
 	///fills the dataBuffer and returns the struct name (and 0 on failure)
-	virtual	const char*	serialize(void* dataBuffer, btSerializer* serializer) const;
+		const char*	serialize(void* dataBuffer, btSerializer* serializer) const override;
 
 
 };

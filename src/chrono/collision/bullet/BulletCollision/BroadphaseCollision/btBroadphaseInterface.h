@@ -40,7 +40,7 @@ struct	btBroadphaseRayCallback : public btBroadphaseAabbCallback
 	unsigned int	m_signs[3];
 	btScalar		m_lambda_max;
 
-	virtual ~btBroadphaseRayCallback() {}
+	~btBroadphaseRayCallback() override {}
 };
 
 #include "LinearMath/btVector3.h"

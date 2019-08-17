@@ -41,12 +41,12 @@ public:
 
 	
 
-	virtual ~btConvexInternalShape()
+	~btConvexInternalShape() override
 	{
 
 	}
 
-	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
+	btVector3	localGetSupportingVertex(const btVector3& vec)const override;
 
 	const btVector3& getImplicitShapeDimensions() const
 	{
@@ -63,18 +63,18 @@ public:
 	}
 
 	///getAabb's default implementation is brute force, expected derived classes to implement a fast dedicated version
-	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override
 	{
 		getAabbSlow(t,aabbMin,aabbMax);
 	}
 
 
 	
-	virtual void getAabbSlow(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabbSlow(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 
-	virtual void	setLocalScaling(const btVector3& scaling);
-	virtual const btVector3& getLocalScaling() const 
+	void	setLocalScaling(const btVector3& scaling) override;
+	const btVector3& getLocalScaling() const override 
 	{
 		return m_localScaling;
 	}
@@ -84,11 +84,11 @@ public:
 		return m_localScaling;
 	}
 
-	virtual void	setMargin(btScalar margin)
+	void	setMargin(btScalar margin) override
 	{
 		m_collisionMargin = margin;
 	}
-	virtual btScalar	getMargin() const
+	btScalar	getMargin() const override
 	{
 		return m_collisionMargin;
 	}
@@ -98,22 +98,22 @@ public:
 		return m_collisionMargin;
 	}
 
-	virtual int		getNumPreferredPenetrationDirections() const
+	int		getNumPreferredPenetrationDirections() const override
 	{
 		return 0;
 	}
 	
-	virtual void	getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const
+	void	getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const override
 	{
 		(void)penetrationVector;
 		(void)index;
 		btAssert(0);
 	}
 
-	virtual	int	calculateSerializeBufferSize() const;
+		int	calculateSerializeBufferSize() const override;
 
 	///fills the dataBuffer and returns the struct name (and 0 on failure)
-	virtual	const char*	serialize(void* dataBuffer, btSerializer* serializer) const;
+		const char*	serialize(void* dataBuffer, btSerializer* serializer) const override;
 
 	
 };
@@ -191,9 +191,9 @@ protected:
 		
 public:
 		
-	virtual void	setLocalScaling(const btVector3& scaling);
+	void	setLocalScaling(const btVector3& scaling) override;
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 	void	recalcLocalAabb();
 

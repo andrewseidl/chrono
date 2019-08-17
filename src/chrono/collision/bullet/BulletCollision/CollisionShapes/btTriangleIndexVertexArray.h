@@ -80,7 +80,7 @@ public:
 	{
 	}
 
-	virtual ~btTriangleIndexVertexArray();
+	~btTriangleIndexVertexArray() override;
 
 	//just to be backwards compatible
 	btTriangleIndexVertexArray(int numTriangles,int* triangleIndexBase,int triangleIndexStride,int numVertices,btScalar* vertexBase,int vertexStride);
@@ -92,19 +92,19 @@ public:
 	}
 	
 	
-	virtual void	getLockedVertexIndexBase(unsigned char **vertexbase, int& numverts,PHY_ScalarType& type, int& vertexStride,unsigned char **indexbase,int & indexstride,int& numfaces,PHY_ScalarType& indicestype,int subpart=0);
+	void	getLockedVertexIndexBase(unsigned char **vertexbase, int& numverts,PHY_ScalarType& type, int& vertexStride,unsigned char **indexbase,int & indexstride,int& numfaces,PHY_ScalarType& indicestype,int subpart=0) override;
 
-	virtual void	getLockedReadOnlyVertexIndexBase(const unsigned char **vertexbase, int& numverts,PHY_ScalarType& type, int& vertexStride,const unsigned char **indexbase,int & indexstride,int& numfaces,PHY_ScalarType& indicestype,int subpart=0) const;
+	void	getLockedReadOnlyVertexIndexBase(const unsigned char **vertexbase, int& numverts,PHY_ScalarType& type, int& vertexStride,const unsigned char **indexbase,int & indexstride,int& numfaces,PHY_ScalarType& indicestype,int subpart=0) const override;
 
 	/// unLockVertexBase finishes the access to a subpart of the triangle mesh
 	/// make a call to unLockVertexBase when the read and write access (using getLockedVertexIndexBase) is finished
-	virtual void	unLockVertexBase(int subpart) {(void)subpart;}
+	void	unLockVertexBase(int subpart) override {(void)subpart;}
 
-	virtual void	unLockReadOnlyVertexBase(int subpart) const {(void)subpart;}
+	void	unLockReadOnlyVertexBase(int subpart) const override {(void)subpart;}
 
 	/// getNumSubParts returns the number of seperate subparts
 	/// each subpart has a continuous array of vertices and indices
-	virtual int		getNumSubParts() const { 
+	int		getNumSubParts() const override { 
 		return (int)m_indexedMeshes.size();
 	}
 
@@ -118,12 +118,12 @@ public:
 		return m_indexedMeshes;
 	}
 
-	virtual void	preallocateVertices(int numverts){(void) numverts;}
-	virtual void	preallocateIndices(int numindices){(void) numindices;}
+	void	preallocateVertices(int numverts) override{(void) numverts;}
+	void	preallocateIndices(int numindices) override{(void) numindices;}
 
-	virtual bool	hasPremadeAabb() const;
-	virtual void	setPremadeAabb(const btVector3& aabbMin, const btVector3& aabbMax ) const;
-	virtual void	getPremadeAabb(btVector3* aabbMin, btVector3* aabbMax ) const;
+	bool	hasPremadeAabb() const override;
+	void	setPremadeAabb(const btVector3& aabbMin, const btVector3& aabbMax ) const override;
+	void	getPremadeAabb(btVector3* aabbMin, btVector3* aabbMax ) const override;
 
 }
 ;

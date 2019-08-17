@@ -259,11 +259,11 @@ namespace HACD
 			}
 		}
 
-		virtual HACD::SimpleHull ** createCollisionVolumes(hacd::HaF32 collapse_percentage,
+		HACD::SimpleHull ** createCollisionVolumes(hacd::HaF32 collapse_percentage,
 			hacd::HaU32 bone_count,
 			const HACD::SimpleBone *bones,
 			const HACD::SimpleSkinnedMesh *mesh,
-			hacd::HaU32 &geom_count)
+			hacd::HaU32 &geom_count) override
 		{
 			release();
 			geom_count = 0;
@@ -373,7 +373,7 @@ namespace HACD
 			}
 		}
 
-		virtual HACD::SimpleHull ** createCollisionVolumes(hacd::HaF32 collapse_percentage,hacd::HaU32 &geom_count)
+		HACD::SimpleHull ** createCollisionVolumes(hacd::HaF32 collapse_percentage,hacd::HaU32 &geom_count) override
 		{
 			HACD::SimpleHull **ret = 0;
 
@@ -390,14 +390,14 @@ namespace HACD
 			return ret;
 		}
 
-		virtual void addSimpleSkinnedTriangle(const HACD::SimpleSkinnedVertex &v1,const HACD::SimpleSkinnedVertex &v2,const HACD::SimpleSkinnedVertex &v3)
+		void addSimpleSkinnedTriangle(const HACD::SimpleSkinnedVertex &v1,const HACD::SimpleSkinnedVertex &v2,const HACD::SimpleSkinnedVertex &v3) override
 		{
 			mVertices.push_back(v1);
 			mVertices.push_back(v2);
 			mVertices.push_back(v3);
 		}
 
-		virtual void addSimpleBone(const HACD::SimpleBone &_b)
+		void addSimpleBone(const HACD::SimpleBone &_b) override
 		{
 			HACD::SimpleBone b = _b;
 			mBones.push_back(b);
@@ -417,7 +417,7 @@ namespace HACD
 			}
 		}
 
-		virtual const char * stristr(const char *str,const char *key)  // case insensitive ststr
+		const char * stristr(const char *str,const char *key) override  // case insensitive ststr
 		{
 			HACD_ASSERT( strlen(str) < 2048 );
 			HACD_ASSERT( strlen(key) < 2048 );

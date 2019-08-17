@@ -531,7 +531,7 @@ class OBJ : public InPlaceParserInterface
 {
 public:
   int LoadMesh(const char *fname,GeometryInterface *callback, bool textured);
-  int ParseLine(int lineno,int argc,const char **argv);  // return TRUE to continue parsing, return FALSE to abort parsing process
+  int ParseLine(int lineno,int argc,const char **argv) override;  // return TRUE to continue parsing, return FALSE to abort parsing process
 private:
 
   void GetVertex(GeometryVertex &v,const char *face) const;
@@ -745,7 +745,7 @@ public:
 		return vcount;
 	}
 
-	virtual void NodeTriangle(const GeometryVertex *v1,const GeometryVertex *v2,const GeometryVertex *v3, bool textured)
+	void NodeTriangle(const GeometryVertex *v1,const GeometryVertex *v2,const GeometryVertex *v3, bool textured) override
 	{
 		mIndices.push_back( GetIndex(v1->mPos, textured ? v1->mTexel : NULL) );
 		mIndices.push_back( GetIndex(v2->mPos, textured ? v2->mTexel : NULL) );

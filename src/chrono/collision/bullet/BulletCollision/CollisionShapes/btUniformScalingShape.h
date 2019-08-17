@@ -31,15 +31,15 @@ class btUniformScalingShape : public btConvexShape
 	
 	btUniformScalingShape(	btConvexShape* convexChildShape, btScalar uniformScalingFactor);
 	
-	virtual ~btUniformScalingShape();
+	~btUniformScalingShape() override;
 	
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
+	btVector3	localGetSupportingVertex(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	btScalar	getUniformScalingFactor() const
 	{
@@ -56,7 +56,7 @@ class btUniformScalingShape : public btConvexShape
 		return m_childConvexShape;
 	}
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "UniformScalingShape";
 	}
@@ -67,19 +67,19 @@ class btUniformScalingShape : public btConvexShape
 
 
 	///getAabb's default implementation is brute force, expected derived classes to implement a fast dedicated version
-	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
-	virtual void getAabbSlow(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabbSlow(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
-	virtual void	setLocalScaling(const btVector3& scaling) ;
-	virtual const btVector3& getLocalScaling() const ;
+	void	setLocalScaling(const btVector3& scaling) override ;
+	const btVector3& getLocalScaling() const override ;
 
-	virtual void	setMargin(btScalar margin);
-	virtual btScalar	getMargin() const;
+	void	setMargin(btScalar margin) override;
+	btScalar	getMargin() const override;
 
-	virtual int		getNumPreferredPenetrationDirections() const;
+	int		getNumPreferredPenetrationDirections() const override;
 	
-	virtual void	getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const;
+	void	getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const override;
 
 
 };

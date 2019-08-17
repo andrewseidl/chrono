@@ -443,13 +443,13 @@ public:
     }
   }
 
-  virtual NxU32           getChunkSize(MemoryChunk *chunk) 
+  NxU32           getChunkSize(MemoryChunk *chunk) override 
   {
 	  return chunk ? chunk->getChunkSize() : 0;
   }
 
   // we have to steal one byte out of every allocation to record the size, so we can efficiently de-allocate it later.
-  virtual void * malloc(size_t size)
+  void * malloc(size_t size) override
   {
     void *ret = 0;
 	Lock();
@@ -462,7 +462,7 @@ public:
     return ret;
   }
 
-  virtual void   free(void *p,MemoryChunk *chunk)
+  void   free(void *p,MemoryChunk *chunk) override
   {
     Lock();
     chunk->deallocate(p,mHeap,this);
@@ -503,7 +503,7 @@ public:
 	  return ret;
   }
 
-  virtual MemoryChunk *   isMicroAlloc(const void *p)  // returns true if this pointer is handled by the micro-allocator.
+  MemoryChunk *   isMicroAlloc(const void *p) override  // returns true if this pointer is handled by the micro-allocator.
   {
     MemoryChunk *ret = 0;
 
@@ -583,7 +583,7 @@ public:
   }
 
   // perform an insertion sort of the new chunk.
-  virtual void addMicroChunk(NxU8 *memStart,NxU8 *memEnd,MemoryChunk *chunk)
+  void addMicroChunk(NxU8 *memStart,NxU8 *memEnd,MemoryChunk *chunk) override
   {
     if ( mMicroChunkCount >= mMaxMicroChunks )
     {
@@ -614,7 +614,7 @@ public:
     }
   }
 
-  virtual void removeMicroChunk(MemoryChunk *chunk)
+  void removeMicroChunk(MemoryChunk *chunk) override
   {
     mLastMicroChunk = 0;
     #ifdef _DEBUG
@@ -751,22 +751,22 @@ public:
   }
 
   // heap allocations used by the micro allocator.
-  virtual void * micro_malloc(size_t size)
+  void * micro_malloc(size_t size) override
   {
     return ::malloc(size);
   }
 
-  virtual void   micro_free(void *p)
+  void   micro_free(void *p) override
   {
     return ::free(p);
   }
 
-  virtual void * micro_realloc(void *oldMem,size_t newSize)
+  void * micro_realloc(void *oldMem,size_t newSize) override
   {
     return ::realloc(oldMem,newSize);
   }
 
-  virtual void * heap_malloc(size_t size)
+  void * heap_malloc(size_t size) override
   {
     void *ret;
 
@@ -781,7 +781,7 @@ public:
     return ret;
   }
 
-  virtual void   heap_free(void *p)
+  void   heap_free(void *p) override
   {
     MemoryChunk *chunk = mMicro->isMicroAlloc(p);
     if ( chunk )
@@ -794,7 +794,7 @@ public:
     }
   }
 
-  virtual void * heap_realloc(void *oldMem,size_t newSize)
+  void * heap_realloc(void *oldMem,size_t newSize) override
   {
     void *ret = 0;
 

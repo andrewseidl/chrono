@@ -30,7 +30,7 @@ public:
 
 	btActivatingCollisionAlgorithm (const btCollisionAlgorithmConstructionInfo& ci, btCollisionObject* colObj0,btCollisionObject* colObj1);
 
-	virtual ~btActivatingCollisionAlgorithm();
+	~btActivatingCollisionAlgorithm() override;
 
 };
 #endif //__BT_ACTIVATING_COLLISION_ALGORITHM_H

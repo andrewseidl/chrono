@@ -102,7 +102,7 @@ btBroadphaseProxy*	btSimpleBroadphase::createProxy(  const btVector3& aabbMin,  
 class	RemovingOverlapCallback : public btOverlapCallback
 {
 protected:
-	virtual bool	processOverlap(btBroadphasePair& pair)
+	bool	processOverlap(btBroadphasePair& pair) override
 	{
 		(void)pair;
 		btAssert(0);
@@ -204,7 +204,7 @@ bool	btSimpleBroadphase::aabbOverlap(btSimpleBroadphaseProxy* proxy0,btSimpleBro
 class CheckOverlapCallback : public btOverlapCallback
 {
 public:
-	virtual bool processOverlap(btBroadphasePair& pair)
+	bool processOverlap(btBroadphasePair& pair) override
 	{
 		return (!btSimpleBroadphase::aabbOverlap(static_cast<btSimpleBroadphaseProxy*>(pair.m_pProxy0),static_cast<btSimpleBroadphaseProxy*>(pair.m_pProxy1)));
 	}

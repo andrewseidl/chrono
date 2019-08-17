@@ -72,7 +72,7 @@ public:
 
 	btCompoundShape(bool enableDynamicAabbTree = true);
 
-	virtual ~btCompoundShape();
+	~btCompoundShape() override;
 
 	void	addChildShape(const btTransform& localTransform,btCollisionShape* shape);
 
@@ -115,30 +115,30 @@ public:
 	}
 
 	///getAabb's default implementation is brute force, expected derived classes to implement a fast dedicated version
-	virtual	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+		void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
 	/** Re-calculate the local Aabb. Is called at the end of removeChildShapes. 
 	Use this yourself if you modify the children or their transforms. */
 	virtual void recalculateLocalAabb(); 
 
-	virtual void	setLocalScaling(const btVector3& scaling);
+	void	setLocalScaling(const btVector3& scaling) override;
 
-	virtual const btVector3& getLocalScaling() const 
+	const btVector3& getLocalScaling() const override 
 	{
 		return m_localScaling;
 	}
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual void	setMargin(btScalar margin)
+	void	setMargin(btScalar margin) override
 	{
 		m_collisionMargin = margin;
 	}
-	virtual btScalar	getMargin() const
+	btScalar	getMargin() const override
 	{
 		return m_collisionMargin;
 	}
-	virtual const char*	getName()const
+	const char*	getName()const override
 	{
 		return "Compound";
 	}
@@ -163,10 +163,10 @@ public:
 		return m_updateRevision;
 	}
 
-	virtual	int	calculateSerializeBufferSize() const;
+		int	calculateSerializeBufferSize() const override;
 
 	///fills the dataBuffer and returns the struct name (and 0 on failure)
-	virtual	const char*	serialize(void* dataBuffer, btSerializer* serializer) const;
+		const char*	serialize(void* dataBuffer, btSerializer* serializer) const override;
 
 
 };

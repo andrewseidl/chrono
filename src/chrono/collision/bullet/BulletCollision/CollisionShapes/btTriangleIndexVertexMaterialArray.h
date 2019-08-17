@@ -64,7 +64,7 @@ public:
         int numMaterials, unsigned char* materialBase, int materialStride,
         int* triangleMaterialsBase, int materialIndexStride);
 
-    virtual ~btTriangleIndexVertexMaterialArray() {}
+    ~btTriangleIndexVertexMaterialArray() override {}
 
     void	addMaterialProperties(const btMaterialProperties& mat, PHY_ScalarType triangleType = PHY_INTEGER)
     {

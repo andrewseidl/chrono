@@ -69,10 +69,10 @@ class btSphereCylinderCollisionAlgorithm : public btActivatingCollisionAlgorithm
     btSphereCylinderCollisionAlgorithm(const btCollisionAlgorithmConstructionInfo& ci)
         : btActivatingCollisionAlgorithm(ci) {}
 
-    virtual void processCollision(btCollisionObject* body0,
+    void processCollision(btCollisionObject* body0,
                                   btCollisionObject* body1,
                                   const btDispatcherInfo& dispatchInfo,
-                                  btManifoldResult* resultOut) {
+                                  btManifoldResult* resultOut) override {
         (void)dispatchInfo;
 
         if (!m_manifoldPtr)
@@ -148,21 +148,21 @@ class btSphereCylinderCollisionAlgorithm : public btActivatingCollisionAlgorithm
         resultOut->refreshContactPoints();
     }
 
-    virtual btScalar calculateTimeOfImpact(btCollisionObject* body0,
+    btScalar calculateTimeOfImpact(btCollisionObject* body0,
                                            btCollisionObject* body1,
                                            const btDispatcherInfo& dispatchInfo,
-                                           btManifoldResult* resultOut) {
+                                           btManifoldResult* resultOut) override {
         // not yet
         return btScalar(1.);
     }
 
-    virtual void getAllContactManifolds(btManifoldArray& manifoldArray) {
+    void getAllContactManifolds(btManifoldArray& manifoldArray) override {
         if (m_manifoldPtr && m_ownManifold) {
             manifoldArray.push_back(m_manifoldPtr);
         }
     }
 
-    virtual ~btSphereCylinderCollisionAlgorithm() {
+    ~btSphereCylinderCollisionAlgorithm() override {
         if (m_ownManifold) {
             if (m_manifoldPtr)
                 m_dispatcher->releaseManifold(m_manifoldPtr);
@@ -170,9 +170,9 @@ class btSphereCylinderCollisionAlgorithm : public btActivatingCollisionAlgorithm
     }
 
     struct CreateFunc : public btCollisionAlgorithmCreateFunc {
-        virtual btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
+        btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
                                                                btCollisionObject* body0,
-                                                               btCollisionObject* body1) {
+                                                               btCollisionObject* body1) override {
             void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btSphereCylinderCollisionAlgorithm));
             if (!m_swapped) {
                 return new (mem) btSphereCylinderCollisionAlgorithm(0, ci, body0, body1, false);
@@ -216,10 +216,10 @@ class btArcSegmentCollisionAlgorithm : public btActivatingCollisionAlgorithm {
     btArcSegmentCollisionAlgorithm(const btCollisionAlgorithmConstructionInfo& ci)
         : btActivatingCollisionAlgorithm(ci) {}
 
-    virtual void processCollision(btCollisionObject* body0,
+    void processCollision(btCollisionObject* body0,
                                   btCollisionObject* body1,
                                   const btDispatcherInfo& dispatchInfo,
-                                  btManifoldResult* resultOut) {
+                                  btManifoldResult* resultOut) override {
         (void)dispatchInfo;
 
         if (!m_manifoldPtr)
@@ -341,21 +341,21 @@ class btArcSegmentCollisionAlgorithm : public btActivatingCollisionAlgorithm {
         resultOut->refreshContactPoints();
     }
 
-    virtual btScalar calculateTimeOfImpact(btCollisionObject* body0,
+    btScalar calculateTimeOfImpact(btCollisionObject* body0,
                                            btCollisionObject* body1,
                                            const btDispatcherInfo& dispatchInfo,
-                                           btManifoldResult* resultOut) {
+                                           btManifoldResult* resultOut) override {
         // not yet
         return btScalar(1.);
     }
 
-    virtual void getAllContactManifolds(btManifoldArray& manifoldArray) {
+    void getAllContactManifolds(btManifoldArray& manifoldArray) override {
         if (m_manifoldPtr && m_ownManifold) {
             manifoldArray.push_back(m_manifoldPtr);
         }
     }
 
-    virtual ~btArcSegmentCollisionAlgorithm() {
+    ~btArcSegmentCollisionAlgorithm() override {
         if (m_ownManifold) {
             if (m_manifoldPtr)
                 m_dispatcher->releaseManifold(m_manifoldPtr);
@@ -363,9 +363,9 @@ class btArcSegmentCollisionAlgorithm : public btActivatingCollisionAlgorithm {
     }
 
     struct CreateFunc : public btCollisionAlgorithmCreateFunc {
-        virtual btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
+        btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
                                                                btCollisionObject* body0,
-                                                               btCollisionObject* body1) {
+                                                               btCollisionObject* body1) override {
             void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btArcSegmentCollisionAlgorithm));
             if (!m_swapped) {
                 return new (mem) btArcSegmentCollisionAlgorithm(0, ci, body0, body1, false);
@@ -410,10 +410,10 @@ class btArcArcCollisionAlgorithm : public btActivatingCollisionAlgorithm {
     btArcArcCollisionAlgorithm(const btCollisionAlgorithmConstructionInfo& ci)
         : btActivatingCollisionAlgorithm(ci) {}
 
-    virtual void processCollision(btCollisionObject* body0,
+    void processCollision(btCollisionObject* body0,
                                   btCollisionObject* body1,
                                   const btDispatcherInfo& dispatchInfo,
-                                  btManifoldResult* resultOut) {
+                                  btManifoldResult* resultOut) override {
         (void)dispatchInfo;
 
         if (!m_manifoldPtr)
@@ -595,21 +595,21 @@ class btArcArcCollisionAlgorithm : public btActivatingCollisionAlgorithm {
         resultOut->refreshContactPoints();
     }
 
-    virtual btScalar calculateTimeOfImpact(btCollisionObject* body0,
+    btScalar calculateTimeOfImpact(btCollisionObject* body0,
                                            btCollisionObject* body1,
                                            const btDispatcherInfo& dispatchInfo,
-                                           btManifoldResult* resultOut) {
+                                           btManifoldResult* resultOut) override {
         // not yet
         return btScalar(1.);
     }
 
-    virtual void getAllContactManifolds(btManifoldArray& manifoldArray) {
+    void getAllContactManifolds(btManifoldArray& manifoldArray) override {
         if (m_manifoldPtr && m_ownManifold) {
             manifoldArray.push_back(m_manifoldPtr);
         }
     }
 
-    virtual ~btArcArcCollisionAlgorithm() {
+    ~btArcArcCollisionAlgorithm() override {
         if (m_ownManifold) {
             if (m_manifoldPtr)
                 m_dispatcher->releaseManifold(m_manifoldPtr);
@@ -617,9 +617,9 @@ class btArcArcCollisionAlgorithm : public btActivatingCollisionAlgorithm {
     }
 
     struct CreateFunc : public btCollisionAlgorithmCreateFunc {
-        virtual btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
+        btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
                                                                btCollisionObject* body0,
-                                                               btCollisionObject* body1) {
+                                                               btCollisionObject* body1) override {
             void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btArcArcCollisionAlgorithm));
             if (!m_swapped) {
                 return new (mem) btArcArcCollisionAlgorithm(0, ci, body0, body1, false);
@@ -662,10 +662,10 @@ class btCEtriangleShapeCollisionAlgorithm : public btActivatingCollisionAlgorith
     btCEtriangleShapeCollisionAlgorithm(const btCollisionAlgorithmConstructionInfo& ci)
         : btActivatingCollisionAlgorithm(ci) {}
 
-    virtual void processCollision(btCollisionObject* body0,
+    void processCollision(btCollisionObject* body0,
                                   btCollisionObject* body1,
                                   const btDispatcherInfo& dispatchInfo,
-                                  btManifoldResult* resultOut) {
+                                  btManifoldResult* resultOut) override {
         (void)dispatchInfo;
 
         if (!m_manifoldPtr)
@@ -1126,21 +1126,21 @@ private:
 
   public:
 
-    virtual btScalar calculateTimeOfImpact(btCollisionObject* body0,
+    btScalar calculateTimeOfImpact(btCollisionObject* body0,
                                            btCollisionObject* body1,
                                            const btDispatcherInfo& dispatchInfo,
-                                           btManifoldResult* resultOut) {
+                                           btManifoldResult* resultOut) override {
         // not yet
         return btScalar(1.);
     }
 
-    virtual void getAllContactManifolds(btManifoldArray& manifoldArray) {
+    void getAllContactManifolds(btManifoldArray& manifoldArray) override {
         if (m_manifoldPtr && m_ownManifold) {
             manifoldArray.push_back(m_manifoldPtr);
         }
     }
 
-    virtual ~btCEtriangleShapeCollisionAlgorithm() {
+    ~btCEtriangleShapeCollisionAlgorithm() override {
         if (m_ownManifold) {
             if (m_manifoldPtr)
                 m_dispatcher->releaseManifold(m_manifoldPtr);
@@ -1148,9 +1148,9 @@ private:
     }
 
     struct CreateFunc : public btCollisionAlgorithmCreateFunc {
-        virtual btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
+        btCollisionAlgorithm* CreateCollisionAlgorithm(btCollisionAlgorithmConstructionInfo& ci,
                                                                btCollisionObject* body0,
-                                                               btCollisionObject* body1) {
+                                                               btCollisionObject* body1) override {
             void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btCEtriangleShapeCollisionAlgorithm));
             if (!m_swapped) {
                 return new (mem) btCEtriangleShapeCollisionAlgorithm(0, ci, body0, body1, false);

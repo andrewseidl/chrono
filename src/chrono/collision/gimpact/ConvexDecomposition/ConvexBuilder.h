@@ -80,7 +80,7 @@ class ConvexBuilder : public ConvexDecompInterface
 public:
 	ConvexBuilder(ConvexDecompInterface *callback);
 
-	virtual ~ConvexBuilder(void);
+	~ConvexBuilder(void) override;
 
 	bool isDuplicate(unsigned int i1,unsigned int i2,unsigned int i3,
 		unsigned int ci1,unsigned int ci2,unsigned int ci3);
@@ -93,14 +93,14 @@ public:
 
 	unsigned int process(const DecompDesc &desc);
 
-	virtual void ConvexDebugTri(const float *p1,const float *p2,const float *p3,unsigned int color);
+	void ConvexDebugTri(const float *p1,const float *p2,const float *p3,unsigned int color) override;
 
-	virtual void ConvexDebugOBB(const float *sides, const float *matrix,unsigned int color);
-	virtual void ConvexDebugPoint(const float *p,float dist,unsigned int color);
+	void ConvexDebugOBB(const float *sides, const float *matrix,unsigned int color) override;
+	void ConvexDebugPoint(const float *p,float dist,unsigned int color) override;
 
-	virtual void ConvexDebugBound(const float *bmin,const float *bmax,unsigned int color);
+	void ConvexDebugBound(const float *bmin,const float *bmax,unsigned int color) override;
 
-	virtual void ConvexDecompResult(ConvexResult &result);
+	void ConvexDecompResult(ConvexResult &result) override;
 
 	void sortChulls(ChUllVector &hulls);
 

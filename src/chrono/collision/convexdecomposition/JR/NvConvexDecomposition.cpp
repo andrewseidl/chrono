@@ -257,7 +257,7 @@ public:
 		//***ALEX*** mThread = 0;
 	}
 
-	~ConvexDecomposition(void)
+	~ConvexDecomposition(void) override
 	{
 		wait();
 		reset();
@@ -276,7 +276,7 @@ public:
 		*/
 	}
 
-	virtual void reset(void)  // reset the input mesh data.
+	void reset(void) override  // reset the input mesh data.
 	{
 		wait();
 		if ( mVertexIndex )
@@ -294,7 +294,7 @@ public:
 		mHulls.clear();
 	}
 
-	virtual bool addTriangle(const NxF32 *p1,const NxF32 *p2,const NxF32 *p3)
+	bool addTriangle(const NxF32 *p1,const NxF32 *p2,const NxF32 *p3) override
 	{
 		bool ret = true;
 		wait();
@@ -336,7 +336,7 @@ public:
 		return ret;
 	}
 
-	virtual NxU32 computeConvexDecomposition(NxF32 skinWidth,
+	NxU32 computeConvexDecomposition(NxF32 skinWidth,
 											 NxU32 decompositionDepth,
 											 NxU32 maxHullVertices,
 											 NxF32 concavityThresholdPercent,
@@ -344,7 +344,7 @@ public:
 											 NxF32 volumeSplitThresholdPercent,
 											 bool  useInitialIslandGeneration,
 											 bool  useIslandGeneration,
-											 bool  useThreads)
+											 bool  useThreads) override
 	{
 		NxU32 ret = 0;
 
@@ -612,7 +612,7 @@ public:
 	}
 
 
-	virtual bool isComputeComplete(void)  // if building the convex hulls in a background thread, this returns true if it is complete.
+	bool isComputeComplete(void) override  // if building the convex hulls in a background thread, this returns true if it is complete.
 	{
 		bool ret = true;
 
@@ -632,7 +632,7 @@ public:
 	}
 
 
-	virtual NxU32 getHullCount(void) 
+	NxU32 getHullCount(void) override 
 	{
 		NxU32 hullCount = 0;
 		wait();
@@ -651,7 +651,7 @@ public:
 		return hullCount;
 	}
 
-	virtual bool  getConvexHullResult(NxU32 hullIndex,ConvexHullResult &result)
+	bool  getConvexHullResult(NxU32 hullIndex,ConvexHullResult &result) override
 	{
 		bool ret = false;
 
@@ -746,7 +746,7 @@ public:
     	mComplete = true;
   	}
 
-	virtual bool cancelCompute(void)  // cause background thread computation to abort early.  Will return no results. Use 'isComputeComplete' to confirm the thread is done.
+	bool cancelCompute(void) override  // cause background thread computation to abort early.  Will return no results. Use 'isComputeComplete' to confirm the thread is done.
 	{
 		bool ret = false;
 

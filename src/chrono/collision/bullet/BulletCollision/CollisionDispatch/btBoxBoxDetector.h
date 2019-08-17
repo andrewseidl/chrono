@@ -35,9 +35,9 @@ public:
 
 	btBoxBoxDetector(btBoxShape* box1,btBoxShape* box2);
 
-	virtual ~btBoxBoxDetector() {};
+	~btBoxBoxDetector() override {};
 
-	virtual void	getClosestPoints(const ClosestPointInput& input,Result& output,class btIDebugDraw* debugDraw,bool swapResults=false);
+	void	getClosestPoints(const ClosestPointInput& input,Result& output,class btIDebugDraw* debugDraw,bool swapResults=false) override;
 
 };
 

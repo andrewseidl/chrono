@@ -77,7 +77,7 @@ public:
 		mRightVertices = 0;
 	}
 
-	~SplitMesh(void)
+	~SplitMesh(void) override
 	{
 		reset();
 	}
@@ -99,7 +99,7 @@ public:
 	}
 
 
-	virtual void splitMesh(const NvSplitMesh &source,NvSplitMesh &leftMesh,NvSplitMesh &rightMesh,const NxF32 *planeEquation,NxF32 precision)
+	void splitMesh(const NvSplitMesh &source,NvSplitMesh &leftMesh,NvSplitMesh &rightMesh,const NxF32 *planeEquation,NxF32 precision) override
 	{
 		reset();
 

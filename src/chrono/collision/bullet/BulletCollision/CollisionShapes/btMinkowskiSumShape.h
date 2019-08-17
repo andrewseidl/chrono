@@ -32,12 +32,12 @@ public:
 
 	btMinkowskiSumShape(const btConvexShape* shapeA,const btConvexShape* shapeB);
 
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const override;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
 	void	setTransformA(const btTransform&	transA) { m_transA = transA;}
 	void	setTransformB(const btTransform&	transB) { m_transB = transB;}
@@ -46,12 +46,12 @@ public:
 	const btTransform& GetTransformB()const  { return m_transB;}
 
 
-	virtual btScalar	getMargin() const;
+	btScalar	getMargin() const override;
 
 	const btConvexShape*	getShapeA() const { return m_shapeA;}
 	const btConvexShape*	getShapeB() const { return m_shapeB;}
 
-	virtual const char*	getName()const 
+	const char*	getName()const override 
 	{
 		return "MinkowskiSum";
 	}

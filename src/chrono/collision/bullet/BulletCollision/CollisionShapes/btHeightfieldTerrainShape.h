@@ -137,24 +137,24 @@ public:
  	 */
 	btHeightfieldTerrainShape(int heightStickWidth,int heightStickLength,void* heightfieldData, btScalar maxHeight,int upAxis,bool useFloatData,bool flipQuadEdges);
 
-	virtual ~btHeightfieldTerrainShape();
+	~btHeightfieldTerrainShape() override;
 
 
 	void setUseDiamondSubdivision(bool useDiamondSubdivision=true) { m_useDiamondSubdivision = useDiamondSubdivision;}
 
 
-	virtual void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const;
+	void getAabb(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const override;
 
-	virtual void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const;
+	void	processAllTriangles(btTriangleCallback* callback,const btVector3& aabbMin,const btVector3& aabbMax) const override;
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override;
 
-	virtual void	setLocalScaling(const btVector3& scaling);
+	void	setLocalScaling(const btVector3& scaling) override;
 	
-	virtual const btVector3& getLocalScaling() const;
+	const btVector3& getLocalScaling() const override;
 	
 	//debugging
-	virtual const char*	getName()const {return "HEIGHTFIELD";}
+	const char*	getName()const override {return "HEIGHTFIELD";}
 
 };
 

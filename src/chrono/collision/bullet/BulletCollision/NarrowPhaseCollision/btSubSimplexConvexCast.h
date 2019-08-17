@@ -38,12 +38,12 @@ public:
 	//virtual ~btSubsimplexConvexCast();
 	///SimsimplexConvexCast calculateTimeOfImpact calculates the time of impact+normal for the linear cast (sweep) between two moving objects.
 	///Precondition is that objects should not penetration/overlap at the start from the interval. Overlap can be tested using btGjkPairDetector.
-	virtual bool	calcTimeOfImpact(
+	bool	calcTimeOfImpact(
 			const btTransform& fromA,
 			const btTransform& toA,
 			const btTransform& fromB,
 			const btTransform& toB,
-			CastResult& result);
+			CastResult& result) override;
 
 };
 

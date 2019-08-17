@@ -38,12 +38,12 @@ public:
 
 	btContinuousConvexCollision (const btConvexShape*	shapeA,const btConvexShape*	shapeB ,btSimplexSolverInterface* simplexSolver,btConvexPenetrationDepthSolver* penetrationDepthSolver);
 
-	virtual bool	calcTimeOfImpact(
+	bool	calcTimeOfImpact(
 				const btTransform& fromA,
 				const btTransform& toA,
 				const btTransform& fromB,
 				const btTransform& toB,
-				CastResult& result);
+				CastResult& result) override;
 
 
 };

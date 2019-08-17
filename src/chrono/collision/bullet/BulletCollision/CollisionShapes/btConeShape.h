@@ -34,15 +34,15 @@ class btConeShape : public btConvexInternalShape
 public:
 	btConeShape (btScalar radius,btScalar height);
 	
-	virtual btVector3	localGetSupportingVertex(const btVector3& vec) const;
-	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec) const;
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	btVector3	localGetSupportingVertex(const btVector3& vec) const override;
+	btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec) const override;
+	void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const override;
 
 	btScalar getRadius() const { return m_radius;}
 	btScalar getHeight() const { return m_height;}
 
 
-	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const
+	void	calculateLocalInertia(btScalar mass,btVector3& inertia) const override
 	{
 		btTransform identity;
 		identity.setIdentity();
@@ -69,7 +69,7 @@ public:
 	}
 
 
-		virtual const char*	getName()const 
+		const char*	getName()const override 
 		{
 			return "Cone";
 		}

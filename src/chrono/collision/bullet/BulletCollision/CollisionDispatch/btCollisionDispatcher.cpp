@@ -216,10 +216,10 @@ public:
 	*/
 
 
-	virtual ~btCollisionPairCallback() {}
+	~btCollisionPairCallback() override {}
 
 
-	virtual bool	processOverlap(btBroadphasePair& pair)
+	bool	processOverlap(btBroadphasePair& pair) override
 	{
 		(*m_dispatcher->getNearCallback())(pair,*m_dispatcher,m_dispatchInfo);
 

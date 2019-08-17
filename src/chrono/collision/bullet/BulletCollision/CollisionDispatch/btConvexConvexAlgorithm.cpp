@@ -243,11 +243,11 @@ struct btPerturbedContactResult : public btManifoldResult
 		m_debugDrawer(debugDrawer)
 	{
 	}
-	virtual ~ btPerturbedContactResult()
+	~ btPerturbedContactResult() override
 	{
 	}
 
-	virtual void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar orgDepth)
+	void addContactPoint(const btVector3& normalOnBInWorld,const btVector3& pointInWorld,btScalar orgDepth) override
 	{
 		btVector3 endPt,startPt;
 		btScalar newDepth;

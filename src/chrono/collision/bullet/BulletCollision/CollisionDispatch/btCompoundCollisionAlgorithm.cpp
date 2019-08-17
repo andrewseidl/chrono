@@ -166,7 +166,7 @@ public:
 			m_compoundColObj->setInterpolationWorldTransform(orgInterpolationTrans);
 		}
 	}
-	void		Process(const btDbvtNode* leaf)
+	void		Process(const btDbvtNode* leaf) override
 	{
 		int index = leaf->dataAsInt;
 

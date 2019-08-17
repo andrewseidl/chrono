@@ -52,7 +52,7 @@ class dgConvexHull3d: public dgList<dgConvexHull3DFace>, public UANS::UserAlloca
 {
 	public:
 	dgConvexHull3d(const hacd::HaF64* const vertexCloud, hacd::HaI32 strideInBytes, hacd::HaI32 count, hacd::HaF64 distTol, hacd::HaI32 maxVertexCount = 0x7fffffff);
-	virtual ~dgConvexHull3d();
+	~dgConvexHull3d() override;
 
 	hacd::HaI32 GetVertexCount() const;
 	const dgBigVector* GetVertexPool() const;

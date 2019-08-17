@@ -55,8 +55,8 @@ class btTriangleMesh : public btTriangleIndexVertexArray
 		
 		int getNumTriangles() const;
 
-		virtual void	preallocateVertices(int numverts){(void) numverts;}
-		virtual void	preallocateIndices(int numindices){(void) numindices;}
+		void	preallocateVertices(int numverts) override{(void) numverts;}
+		void	preallocateIndices(int numindices) override{(void) numindices;}
 
 		///findOrAddVertex is an internal method, use addTriangle instead
 		int		findOrAddVertex(const btVector3& vertex, bool removeDuplicateVertices);

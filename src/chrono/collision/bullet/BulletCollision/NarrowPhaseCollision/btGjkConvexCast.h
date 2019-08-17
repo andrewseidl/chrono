@@ -38,12 +38,12 @@ public:
 	btGjkConvexCast(const btConvexShape*	convexA,const btConvexShape* convexB,btSimplexSolverInterface* simplexSolver);
 
 	/// cast a convex against another convex object
-	virtual bool	calcTimeOfImpact(
+	bool	calcTimeOfImpact(
 					const btTransform& fromA,
 					const btTransform& toA,
 					const btTransform& fromB,
 					const btTransform& toB,
-					CastResult& result);
+					CastResult& result) override;
 
 };
 

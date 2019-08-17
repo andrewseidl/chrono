@@ -169,12 +169,12 @@ void ChElementShellANCF::ComputeMmatrixGlobal(ChMatrixRef M) {
 class ShellANCF_Mass : public ChIntegrable3D<ChMatrixNM<double, 24, 24>> {
   public:
     ShellANCF_Mass(ChElementShellANCF* element) : m_element(element) {}
-    ~ShellANCF_Mass() {}
+    ~ShellANCF_Mass() override {}
 
   private:
     ChElementShellANCF* m_element;
 
-    virtual void Evaluate(ChMatrixNM<double, 24, 24>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChMatrixNM<double, 24, 24>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF_Mass::Evaluate(ChMatrixNM<double, 24, 24>& result, const double x, const double y, const double z) {
@@ -231,13 +231,13 @@ void ChElementShellANCF::ComputeNodalMass() {
 class ShellANCF_Gravity : public ChIntegrable3D<ChVectorN<double, 24>> {
   public:
     ShellANCF_Gravity(ChElementShellANCF* element, const ChVector<> gacc) : m_element(element), m_gacc(gacc) {}
-    ~ShellANCF_Gravity() {}
+    ~ShellANCF_Gravity() override {}
 
   private:
     ChElementShellANCF* m_element;
     ChVector<> m_gacc;
 
-    virtual void Evaluate(ChVectorN<double, 24>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 24>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF_Gravity::Evaluate(ChVectorN<double, 24>& result, const double x, const double y, const double z) {
@@ -297,7 +297,7 @@ class ShellANCF_Force : public ChIntegrable3D<ChVectorN<double, 54>> {
                     ChVectorN<double, 5>* alpha_eas  // Vector of internal parameters for EAS formulation
                     )
         : m_element(element), m_kl(kl), m_alpha_eas(alpha_eas) {}
-    ~ShellANCF_Force() {}
+    ~ShellANCF_Force() override {}
 
   private:
     ChElementShellANCF* m_element;
@@ -305,7 +305,7 @@ class ShellANCF_Force : public ChIntegrable3D<ChVectorN<double, 54>> {
     ChVectorN<double, 5>* m_alpha_eas;
 
     /// Evaluate (strainD'*strain)  at point x, include ANS and EAS.
-    virtual void Evaluate(ChVectorN<double, 54>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 54>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF_Force::Evaluate(ChVectorN<double, 54>& result, const double x, const double y, const double z) {
@@ -652,7 +652,7 @@ class ShellANCF_Jacobian : public ChIntegrable3D<ChVectorN<double, 696>> {
     size_t m_kl;
 
     // Evaluate integrand at the specified point.
-    virtual void Evaluate(ChVectorN<double, 696>& result, const double x, const double y, const double z) override;
+    void Evaluate(ChVectorN<double, 696>& result, const double x, const double y, const double z) override;
 };
 
 void ShellANCF_Jacobian::Evaluate(ChVectorN<double, 696>& result, const double x, const double y, const double z) {

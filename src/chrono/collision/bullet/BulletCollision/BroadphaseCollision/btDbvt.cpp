@@ -24,7 +24,7 @@ typedef btAlignedObjectArray<const btDbvtNode*>	tConstNodeArray;
 struct btDbvtNodeEnumerator : btDbvt::ICollide
 {
 	tConstNodeArray	nodes;
-	void Process(const btDbvtNode* n) { nodes.push_back(n); }
+	void Process(const btDbvtNode* n) override { nodes.push_back(n); }
 };
 
 //
