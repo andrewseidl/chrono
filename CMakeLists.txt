@@ -54,6 +54,21 @@ set(CPACK_PACKAGE_VERSION_MAJOR "${CHRONO_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${CHRONO_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${CHRONO_VERSION_PATCH}")
 
+# clang-tidy
+find_program(JQ_EXECUTABLE NAMES jq)
+if (NOT ${JQ_EXECUTABLE} STREQUAL "JQ_EXECUTABLE-NOTFOUND")
+  file(WRITE ${CMAKE_BINARY_DIR}/jq.filter "map(select(.file | test(\".*/(build|ThirdParty)/.*\") | not))")
+  add_custom_target(clang-tidy
+    COMMAND mkdir -p clang-tidy
+    COMMAND ${JQ_EXECUTABLE} -f jq.filter ${CMAKE_BINARY_DIR}/compile_commands.json > clang-tidy/compile_commands.json
+    COMMAND cd clang-tidy && ${CMAKE_SOURCE_DIR}/contrib/clang-tidy/run-clang-tidy.py -quiet -fix -header-filter="${CMAKE_SOURCE_DIR}/.*" 2> /dev/null
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
+else()
+  message(STATUS "jq not found, disabling clang-tidy target")
+endif()
+
+
 # Version as a hexadecimal integer of the form 0x00MMmmPP
 set(CH_VERSION 0x00040000)
 
